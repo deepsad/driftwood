@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17151a">
+<title>Driftwood — Music grows here.</title>
+<style>
+:root{color-scheme:dark;--ink:#17151a;--paper:#f4ede6;--pink:#f7a79b;--muted:#c2b9bc;--line:#494148;--mono:Consolas,"Liberation Mono",monospace;--display:Georgia,"Times New Roman",serif;--sans:"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--ink);color:var(--paper);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}button,input{font:inherit}button,a,input{touch-action:manipulation}a{color:inherit;text-decoration:none}button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #ffd5a9;outline-offset:5px}
+.shell{width:min(1376px,90%);margin:auto}.skip{position:fixed;top:-100px;left:16px;z-index:9;background:var(--paper);color:var(--ink);padding:10px}.skip:focus{top:10px}
+.mast{border-bottom:1px solid var(--line)}.mast-inner,nav,.brand,.pill,.link,.tag,.figure-head,.study,.age,.footer-inner,.spec-line{display:flex;align-items:center}.mast-inner{min-height:84px;justify-content:space-between;gap:20px}.brand{gap:10px;font:600 31px/1 var(--display);letter-spacing:-1.9px}.brand svg{width:35px;height:39px;color:var(--pink)}nav{gap:34px;font-size:14px}.nav-link{color:var(--muted)}.nav-link:hover,.link:hover{color:var(--pink)}.pill{border:1px solid transparent;border-radius:99px;justify-content:center;gap:20px;min-height:49px;padding:0 24px;font-size:14px;line-height:1;font-weight:650;color:#22191c;background:var(--pink);width:fit-content;transition:background .18s,transform .18s}.pill:hover{background:#ffc2b6;transform:translateY(-2px)}.pill:active{transform:translateY(0)}.pill.outline{background:transparent;color:var(--paper);border-color:#76636a;min-height:39px;padding:0 18px;gap:14px}.pill.outline:hover{border-color:var(--pink);color:var(--pink)}.arrow{font:normal 1.3em/1 Arial,sans-serif}
+.hero{display:grid;grid-template-columns:.92fr 1.08fr;gap:4%;align-items:center;padding:42px 0 44px}.hero-copy{padding:18px 0 24px}.tag,.micro{font:11px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase}.tag{gap:11px;color:var(--pink)}.tag i{height:1px;width:29px;background:currentColor}.hero h1,h2,h3,blockquote{font-family:var(--display);font-weight:400}.hero h1{font-size:clamp(70px,7.95vw,128px);line-height:.94;letter-spacing:-.071em;margin:34px 0 23px}.hero h1 span,.hero h1 em{display:block}.hero h1 em,h2 em,blockquote em{color:var(--pink);font-weight:400}.hero-copy>p{font-size:clamp(17px,1.35vw,21px);max-width:395px;line-height:1.56;color:var(--muted);margin:0}.hero-actions{display:flex;gap:26px;align-items:center;margin-top:33px}.link{font-size:14px;gap:10px;border-bottom:1px solid #766770;padding:6px 0}.hero-spec{display:flex;align-items:center;gap:9px;margin-top:40px;font:11px var(--mono);color:#b4a7af}.hero-spec svg{width:27px;height:17px;color:var(--pink)}
+.specimen{margin:0;min-width:0;border:1px solid #50434c;border-radius:10px;overflow:hidden;background:#231f27}.viewport{position:relative;aspect-ratio:1.32;background:radial-gradient(ellipse at 52% 55%,#51414d 0,#312a35 45%,#232027 82%);isolation:isolate}.viewport:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#c6aabe09 1px,transparent 1px),linear-gradient(90deg,#c6aabe09 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,#000,transparent 93%);z-index:-1}.figure-head{position:absolute;top:18px;left:19px;right:19px;justify-content:space-between;color:#d3c6cd;font:10px var(--mono);text-transform:uppercase;letter-spacing:.12em}.live{display:flex;align-items:center;gap:7px}.live:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--pink);box-shadow:0 0 7px #f8a69a55}.viewport canvas{width:100%;height:100%;display:block}.fig-label{position:absolute;bottom:13px;left:19px;font:italic 14px var(--display);color:#c9bac2}.reg{position:absolute;right:18px;bottom:11px;font:18px var(--mono);color:#bfa8b3}
+.study{border-top:1px solid #52464f;padding:17px 20px;gap:15px;background:#272129}.study button{flex:none;width:34px;height:34px;display:grid;place-items:center;border:1px solid #6a5863;background:transparent;color:var(--pink);border-radius:50%}.study button:hover{background:#43323c}.study button svg{height:13px;width:13px}.study .micro{font-size:9px;color:#cabbc5;display:block}.age{min-width:84px;display:block}.age output{font:14px var(--mono);color:var(--paper)}input[type=range]{flex:1;min-width:35px;appearance:none;height:28px;background:transparent;margin:0;cursor:pointer;--pos:0%}input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:linear-gradient(to right,var(--pink) var(--pos),#675461 var(--pos))}input[type=range]::-moz-range-track{height:3px;background:#675461}input[type=range]::-moz-range-progress{height:3px;background:var(--pink)}input[type=range]::-webkit-slider-thumb{appearance:none;width:12px;height:12px;margin-top:-4.5px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 4px #f7a79b18}input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;background:var(--pink);border-radius:50%}.study .limit{font:10px var(--mono);color:#c4b4be;white-space:nowrap}
+.section{border-top:1px solid var(--line);padding:62px 0 70px}.section-heading{display:flex;align-items:end;justify-content:space-between;margin:17px 0 35px;gap:25px}h2{font-size:clamp(44px,4.8vw,78px);line-height:1.04;letter-spacing:-.055em;margin:0}.section-heading p{color:var(--muted);max-width:285px;margin:0;font-size:15px}.steps{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:8px;overflow:hidden}.step{padding:25px 26px 28px;background:#201c22}.step+.step{border-left:1px solid var(--line)}.step-top{display:flex;align-items:center;justify-content:space-between}.step-top span{font:11px var(--mono);color:var(--pink);letter-spacing:.08em}.glyph{width:86px;height:42px;color:#eaa99d;overflow:visible}.glyph path,.glyph circle{vector-effect:non-scaling-stroke}h3{font-size:33px;line-height:1.12;letter-spacing:-.04em;margin:19px 0 10px}.step p,.feature p{margin:0;color:var(--muted);line-height:1.6;font-size:15px;max-width:36ch}.trace{stroke-dasharray:1;stroke-dashoffset:0}.ready .trace{stroke-dashoffset:1}.ready .in-view .trace{stroke-dashoffset:0;transition:stroke-dashoffset 1s ease-out}
+.details{display:grid;grid-template-columns:1fr 1.1fr;gap:9%}.details h2{margin-top:26px}.feature{display:grid;grid-template-columns:112px 1fr;column-gap:20px;padding:24px 0;border-top:1px solid var(--line)}.feature:last-child{border-bottom:1px solid var(--line)}.feature .micro{color:var(--pink);padding-top:6px}.feature h3{font-size:26px;margin:0 0 6px}.feature p{max-width:43ch}.journal{background:#dfb9b0;color:#2a2028}.journal .shell{display:grid;grid-template-columns:.45fr 1fr;gap:6%;padding-block:64px}.journal .tag,.journal em{color:#5d3645}.journal .tag{align-self:start;margin-top:12px}.journal figure{margin:0}blockquote{font-size:clamp(34px,3.5vw,58px);letter-spacing:-.042em;line-height:1.14;margin:0 0 23px}.journal figcaption{font:12px var(--mono)}.order{display:flex;justify-content:space-between;align-items:center;gap:35px;padding-block:78px}.order h2{margin:22px 0 13px}.order p{margin:0;color:var(--muted)}footer{border-top:1px solid var(--line)}.footer-inner{justify-content:space-between;padding-block:25px;color:var(--muted);gap:15px}.footer-inner .brand{color:var(--paper);font-size:23px}.footer-inner .brand svg{width:25px;height:28px}.footer-inner .micro{font-size:10px}.footer-inner a:last-child{font-size:13px}
+dialog{width:min(440px,calc(100% - 30px));border:1px solid #77616c;border-radius:12px;padding:32px;background:#242026;color:var(--paper);box-shadow:0 30px 120px #0009}dialog::backdrop{background:#100e12c9}dialog h2{font-size:44px;margin:25px 0 12px}dialog p{color:var(--muted);font-size:15px}dialog form{display:grid;gap:12px}dialog label{font-size:14px}dialog input{color:var(--paper);padding:12px;background:var(--ink);border:1px solid #8b7682;border-radius:5px;width:100%}dialog .pill{margin-top:6px}dialog .close{position:absolute;right:12px;top:12px;border:0;background:transparent;color:var(--paper);font:24px Arial;width:36px;height:36px}dialog [hidden]{display:none}
+@media(min-width:1550px){.hero{gap:6%}}
+@media(max-width:950px){.hero{gap:3%}.hero h1{font-size:8.5vw}.hero-actions{gap:18px}.hero .pill{padding:0 18px}.figure-head{font-size:9px}.viewport{aspect-ratio:1.1}.hero-spec{margin-top:26px}.step{padding:18px}.details{gap:5%}.feature{grid-template-columns:90px 1fr}}
+@media(max-width:740px){.shell{width:calc(100% - 40px)}.mast-inner{min-height:66px}.brand{font-size:27px}.brand svg{width:29px}nav{gap:16px}.nav-link{display:none}.hero{grid-template-columns:1fr;padding:34px 0 32px;gap:26px}.hero-copy{padding:0}.hero h1{font-size:clamp(55px,16.9vw,99px);margin:22px 0 16px}.hero-copy>p{font-size:17px;max-width:43ch}.hero-actions{margin-top:23px}.hero-spec{display:none}.viewport{aspect-ratio:1.35}.study{padding:12px 14px;gap:11px}.section{padding:38px 0 42px}.section-heading{display:block;margin:16px 0 22px}.section-heading p{margin-top:13px;max-width:38ch}.steps{grid-template-columns:1fr}.step{padding:18px 21px 22px}.step+.step{border-left:0;border-top:1px solid var(--line)}.step h3{margin:6px 0 7px}.step p{max-width:50ch}.details{grid-template-columns:1fr;gap:26px}.details h2{margin-top:16px}.feature{grid-template-columns:90px 1fr}.journal .shell{grid-template-columns:1fr;gap:25px;padding-block:38px}.journal .tag{margin:0}.order{align-items:start;flex-direction:column;padding-block:42px;gap:23px}.footer-inner .micro{display:none}}
+@media(max-width:380px){.shell{width:calc(100% - 28px)}.hero-actions{gap:15px}.study .limit{display:none}.hero h1{font-size:16.9vw}.feature{grid-template-columns:78px 1fr;gap:8px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}.ready .trace{stroke-dashoffset:0}}
+</style>
+</head>
+<body id="top">
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" style="position:absolute"><defs><symbol id="coral-mark" viewBox="0 0 44 46"><g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 42q3-12 1-21l1-16m0 16 8-8 2-7m-4 11 8-1 4-6M21 32l-9-8-2-14m4 16-8-3-3-7m7 1 6-6 1-6m5 31 11-8 2-6"/></g></symbol></defs></svg>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast"><div class="mast-inner shell"><a class="brand" href="#top" aria-label="Driftwood home"><svg aria-hidden="true"><use href="#coral-mark"/></svg>Driftwood</a><nav aria-label="Main navigation"><a class="nav-link" href="#process">How it grows</a><a class="nav-link" href="#notes">Field notes</a><a class="pill outline" href="#preorder">Pre-order <span class="arrow" aria-hidden="true">↗</span></a></nav></div></header>
+<main id="main">
+<section class="hero shell" aria-labelledby="hero-title">
+<div class="hero-copy"><div class="tag"><i></i>Listening object № 001</div><h1 id="hero-title"><span>Music grows</span><em>here.</em></h1><p>A tiny desk device that turns your Spotify listening history into slowly growing physical coral.</p><div class="hero-actions"><a class="pill" href="#preorder">Pre-order Driftwood <span class="arrow" aria-hidden="true">↗</span></a><a class="link" href="#process">How it grows <span aria-hidden="true">↓</span></a></div><div class="hero-spec"><svg viewBox="0 0 28 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7v4m4-7v10m4-13v16m4-12v8m4-10v12m4-9v6m4-5v4"/></svg>Ø 82 mm  ·  Graphite &amp; glass</div></div>
+<figure class="specimen" aria-label="Interactive Driftwood growth study"><div class="viewport"><div class="figure-head"><span>Fig. 01 / Driftwood</span><span class="live">Specimen view</span></div><canvas id="reef" width="820" height="620" role="img" aria-label="A branching peach coral sculpture inside a smoked-glass dome on a graphite base. Adjust the day to explore its growth.">An illustrated coral specimen in a glass dome.</canvas><span class="fig-label">Branching study, no. 01</span><span class="reg" aria-hidden="true">+</span></div><figcaption class="study"><button type="button" id="play" aria-label="Play growth study"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path id="play-icon" d="M4 2l9 6-9 6z"/></svg></button><label class="age" for="day"><span class="micro">Growth study</span><output id="day-label" for="day">Day 042</output></label><input id="day" type="range" min="1" max="56" value="42" aria-label="Specimen age in days"><span class="limit">56 days</span></figcaption></figure>
+</section>
+<section class="section shell" id="process" aria-labelledby="process-title"><div class="tag"><i></i>The process</div><div class="section-heading"><h2 id="process-title">From sound to <em>stone.</em></h2><p>Three small steps. The first is probably something you’re already doing.</p></div><div class="steps">
+<article class="step"><div class="step-top"><span>01 / INPUT</span><svg class="glyph" viewBox="0 0 90 42" aria-hidden="true"><path class="trace" pathLength="1" d="M1 22h7l4-7 4 13 5-24 5 33 5-25 5 16 4-8 5 2 5-14 5 23 5-17 4 10 5-4 4 2h15" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div><h3>Press play.</h3><p>Connect Spotify and listen as usual. Driftwood reads the little patterns in your listening history.</p></article>
+<article class="step"><div class="step-top"><span>02 / PATTERN</span><svg class="glyph" viewBox="0 0 90 42" aria-hidden="true"><g fill="none" stroke="currentColor"><path class="trace" pathLength="1" d="M3 31Q16 31 25 20T47 20 68 9 88 8M3 36Q18 36 27 26T49 26 70 15 88 14M3 24Q15 24 23 13T45 13 66 3 88 2"/></g></svg></div><h3>Find a shape.</h3><p>Tempo bends a branch. A new artist opens a fork. That song on repeat thickens a familiar stem.</p></article>
+<article class="step"><div class="step-top"><span>03 / GROWTH</span><svg class="glyph" viewBox="0 0 90 42" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path class="trace" pathLength="1" d="M42 40q5-12 2-22l3-15M44 31 30 22 23 9m8 14-13-4m27 8 16-10 5-13M59 19l15-3m-29 4-9-8-2-8m10 30 17-5 9-7"/></g></svg></div><h3>Give it time.</h3><p>Each night, a fine layer of mineral settles into place. By morning, yesterday has a shape you can touch.</p></article>
+</div></section>
+<section class="section details shell" aria-labelledby="details-title"><div><div class="tag"><i></i>Object details</div><h2 id="details-title">Small footprint.<br><em>Long memory.</em></h2></div><div>
+<article class="feature"><span class="micro">01 / Scale</span><div><h3>A place beside the speakers.</h3><p>At 82 mm across, the base tucks between a coffee cup and the corner of a record sleeve.</p></div></article>
+<article class="feature"><span class="micro">02 / Matter</span><div><h3>Mineral, through and through.</h3><p>A replaceable mineral cartridge builds each coral form. Lift the glass to feel the ridges with a fingertip.</p></div></article>
+<article class="feature"><span class="micro">03 / Rhythm</span><div><h3>Happy with a quiet week.</h3><p>One USB-C cable keeps it growing. Take a break from music and your specimen rests until the next track.</p></div></article>
+</div></section>
+<section class="journal" id="notes" aria-labelledby="notes-title"><div class="shell"><h2 class="tag" id="notes-title"><i></i>Field notes / 001</h2><figure><blockquote>“There’s a little fork on the left from the week my daughter discovered jazz. <em>I know exactly which week that was.</em>”</blockquote><figcaption>Mara L. &nbsp; / &nbsp; Prototype listener, day 56</figcaption></figure></div></section>
+<section class="order shell" id="preorder" aria-labelledby="order-title"><div><div class="tag"><i></i>First edition</div><h2 id="order-title">Start your <em>specimen.</em></h2><p>Driftwood, a glass dome, and your first mineral cartridge. $148.</p></div><button type="button" class="pill" id="open-order">Pre-order Driftwood <span class="arrow" aria-hidden="true">↗</span></button></section>
+</main><footer><div class="footer-inner shell"><a class="brand" href="#top"><svg aria-hidden="true"><use href="#coral-mark"/></svg>Driftwood</a><span class="micro">A listening object</span><a href="#top">Back to top ↑</a></div></footer>
+<dialog id="order-dialog" aria-labelledby="dialog-title"><button type="button" class="close" aria-label="Close pre-order window">×</button><div class="tag"><i></i>First edition</div><h2 id="dialog-title">Your Driftwood.</h2><div id="order-entry"><p>One listening object in graphite, with a mineral cartridge. <strong>$148.</strong></p><form id="order-form"><label for="order-name">Name on your specimen card</label><input id="order-name" name="name" maxlength="48" required autocomplete="given-name" placeholder="Your name"><small>This fictional pre-order saves a specimen card in this browser. No payment is collected.</small><button class="pill">Save specimen card <span aria-hidden="true">↗</span></button></form></div><div id="order-saved" hidden><p id="card-summary"></p><button class="pill" id="done" type="button">Done</button></div></dialog>
+<script>
+(() => {
+  'use strict';
+  const canvas = document.querySelector('#reef');
+  const ctx = canvas.getContext('2d');
+  const stage = document.querySelector('.viewport');
+  const slider = document.querySelector('#day');
+  const label = document.querySelector('#day-label');
+  const play = document.querySelector('#play');
+  let seed = 7319;
+  function random() {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    return seed / 4294967296;
+  }
+  const clamp = (n, low, high) => Math.max(low, Math.min(high, n));
+  const segments = [];
+  // Grow connected, slightly irregular limbs. Age is measured along each limb.
+  function branch(x, y, z, angle, length, radius, depth, birth) {
+    const divisions = 6;
+    const bend = (random() - .5) * .47;
+    const duration = depth === 5 ? .21 : .078 + random() * .055;
+    let mid, tipRadius = radius;
+    for (let i = 0; i < divisions; i++) {
+      const t = (i + 1) / divisions;
+      const heading = angle + bend * t + (random() - .5) * .23;
+      const nx = x + Math.sin(heading) * length / divisions;
+      const ny = y - Math.cos(heading) * length / divisions;
+      const nz = z + (random() - .48) * 1.9;
+      const r = radius * (1 - (depth === 0 ? .06 : .25) * t);
+      const pores = Array.from({length: 12}, () => [random(), random() * 2 - 1, random()]);
+      segments.push({x,y,z,nx,ny,nz,r0:tipRadius,r1:r,birth:birth+duration*i/divisions,
+        duration:duration/divisions,pores});
+      x = nx; y = ny; z = nz; tipRadius = r;
+      if (i === 3) mid = {x,y,z};
+    }
+    if (depth <= 0) return;
+    const side = random() > .5 ? 1 : -1;
+    const next = angle * .60 + bend;
+    branch(x,y,z,next+side*(.18+random()*.36),length*(.68+random()*.16),radius*.78,depth-1,birth+duration);
+    branch(x,y,z-1,next-side*(.4+random()*.4),length*(.55+random()*.28),radius*.73,depth-1,birth+duration);
+    if(depth >= 3 || (depth === 2 && random() > .47))
+      branch(mid.x,mid.y,mid.z-4,next+side*(.7+random()*.33),length*.58,radius*.62,depth-2,birth+duration*.72);
+  }
+  branch(-5,0,-6,-.83,66,11.6,4,.04);
+  branch(3,1,-3,.92,67,12,4,.045);
+  branch(-4,0,1,-.33,68,13,5,.015);
+  branch(5,0,-2,.41,63,11,4,.035);
+  branch(0,0,3,.065,82,14,4,0);
+  // Fit the completed colony into the bell jar; retain its natural aspect ratio.
+  const left = Math.min(...segments.map(s => s.nx));
+  const right = Math.max(...segments.map(s => s.nx));
+  const high = -Math.min(...segments.map(s => s.ny));
+  const coralScale = Math.min(287/(right-left),248/high);
+  const dust = Array.from({length:1450}, () => [random(),random(),random()]);
+  const rock = Array.from({length:94}, () => {
+    const a=random()*Math.PI*2, d=Math.sqrt(random());
+    return [Math.cos(a)*d*66, Math.sin(a)*d*12, 1+random()*3, random()];
+  });
+  function linear(x,y,ex,ey,stops) {
+    const gradient=ctx.createLinearGradient(x,y,ex,ey);
+    stops.forEach(([n,color])=>gradient.addColorStop(n,color));
+    return gradient;
+  }
+  function ellipse(x,y,rx,ry,fill) {
+    ctx.beginPath(); ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2); ctx.fillStyle=fill; ctx.fill();
+  }
+  function path(d,fill,stroke,width=1) {
+    const shape=new Path2D(d);
+    if(fill){ctx.fillStyle=fill;ctx.fill(shape);}
+    if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke(shape);}
+  }
+  const dome='M189 388 L189 139 C189 66 261 43 360 43 C457 43 531 65 531 139 L531 388 C531 425 189 425 189 388 Z';
+  function render(age) {
+    if (!ctx) return;
+    const w=canvas.width,h=canvas.height;
+    ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,w,h);
+    const scale=Math.min(w/720,h/500);
+    ctx.setTransform(scale,0,0,scale,(w-720*scale)/2,(h-500*scale)/2+5*scale);
+    // Ground shadow and the turned graphite plinth.
+    ctx.save();ctx.translate(362,447);ctx.scale(1,.14);
+    const shadow=ctx.createRadialGradient(0,0,3,0,0,230);
+    shadow.addColorStop(0,'#0c0910ee');shadow.addColorStop(.64,'#100d13b5');shadow.addColorStop(1,'#100d1300');
+    ellipse(0,0,230,230,shadow);ctx.restore();
+    const metal=linear(180,0,538,0,[[0,'#232024'],[.06,'#565052'],[.19,'#807373'],[.31,'#53494b'],[.58,'#393136'],[.85,'#29252a'],[.96,'#40383f'],[1,'#211e24']]);
+    path('M181 384 C181 356 539 356 539 384 L539 417 C538 459 184 459 181 417Z',metal,'#211c22',1.5);
+    ctx.save();ctx.clip(new Path2D('M181 384 Q360 442 539 384 L539 417 C538 459 184 459 181 417Z'));
+    for(let i=184;i<538;i+=2.9){
+      const y=411+31*Math.sqrt(Math.max(0,1-((i-360)/181)**2));
+      ctx.fillStyle='#100e123d';ctx.fillRect(i,y-38,1,47);
+      ctx.fillStyle='#ccb9b522';ctx.fillRect(i+1,y-38,.7,47);
+    }
+    ctx.restore();
+    ellipse(360,384,179,32,'#908183');ellipse(360,383,176,30,'#342e34');
+    ellipse(360,379,168,26,linear(0,354,0,405,[[0,'#242027'],[.58,'#57494c'],[1,'#827276']]));
+    path(dome,linear(189,0,531,0,[[0,'#c5acbb2c'],[.06,'#c4a7bd10'],[.28,'#ceb4c20c'],[.6,'#c6a7b007'],[.95,'#d0b7c417'],[1,'#c8b3c527']]),'#d6bfcc75',1.3);
+    path('M199 373 L199 140 C200 93 227 75 253 63',null,'#eddfeb41',2);
+    path('M523 369 L523 143 C523 103 509 89 493 76',null,'#dfc5d454',1.3);
+    // A low mineral bed gives the colony a place to attach.
+    const growth=clamp((age-1)/55,0,1);
+    ctx.save();ctx.translate(360,377);
+    ellipse(3,4,75,12,'#201b224d');
+    rock.forEach(([x,y,r,v])=>ellipse(x,y,r,r*.59,v>.58?'#ac8278':v>.27?'#7d635f':'#4f4146'));
+    ctx.scale(coralScale*(.74+.26*growth),coralScale*(.74+.26*growth));
+    const progress=.04+growth*.96;
+    segments.forEach(s=>{
+      const part=clamp((progress-s.birth)/s.duration,0,1);
+      if(!part)return;
+      const dx=(s.nx-s.x)*part,dy=(s.ny-s.y)*part;
+      const len=Math.hypot(dx,dy); if(len<.02)return;
+      const ux=-dy/len,uy=dx/len;
+      const r=s.r0*(.79+.21*growth),end=r+(s.r1-s.r0)*part;
+      const x=s.x,y=s.y,ex=x+dx,ey=y+dy;
+      const shade=clamp((s.z+10)/20,0,1);
+      const skin=linear(x-ux*r,y-uy*r,x+ux*r,y+uy*r,[[0,'#a35359'],[.18,'#ce786e'],[.4,'#ffbaa0'],[.57,'#f4a18c'],[.81,'#dd8579'],[1,'#ab5d61']]);
+      ctx.fillStyle=skin;
+      ctx.beginPath();ctx.moveTo(x+ux*r,y+uy*r);ctx.lineTo(ex+ux*end,ey+uy*end);
+      ctx.arc(ex,ey,end,Math.atan2(uy,ux),Math.atan2(uy,ux)+Math.PI,true);
+      ctx.lineTo(x-ux*r,y-uy*r);ctx.arc(x,y,r,Math.atan2(-uy,-ux),Math.atan2(-uy,-ux)+Math.PI,true);ctx.fill();
+      if(shade<.55){ctx.fillStyle='rgba(77,35,57,'+(.55-shade)*.57+')';ctx.fill();}
+      for(const [t,lateral,v] of s.pores){
+        if(t>part)continue;
+        const local=r+(end-r)*t/part;
+        const px=x+(s.nx-x)*t+ux*lateral*local*.91,py=y+(s.ny-y)*t+uy*lateral*local*.91;
+        const pr=Math.min(local*.12,.34+v*.71);
+        ellipse(px,py,pr,pr*.76,v>.5?'#984f534f':'#ffe0bc75');
+      }
+    });
+    ctx.restore();
+    // Reflections follow the curvature of the blown glass.
+    ctx.save();ctx.clip(new Path2D(dome));
+    path('M202 331 L202 145 Q202 103 225 84 Q214 106 214 152 L212 325 Q208 333 202 331Z',linear(200,120,218,318,[[0,'#f3e4e431'],[1,'#f4d7e105']]));
+    path('M219 193 L220 132 Q220 108 230 97 L226 134 L225 193Z','#ffe6ef0f');
+    path('M499 94 Q516 113 515 154 L514 331 L509 337 L508 141 Q508 116 499 94Z','#ffe2ed10');
+    path('M234 77 C276 48 346 44 410 50',null,'#f1dadf6b',2);
+    dust.forEach(([x,y,v])=>{ctx.fillStyle=v>.8?'#f7dbdc25':'#f7dbdc0d';ctx.fillRect(189+x*342,44+y*366,.8,.8);});
+    ctx.restore();
+    path('M190 386 C191 419 530 420 531 386',null,'#e9d5db95',1.5);
+    path('M182 416 C184 457 535 458 539 417',null,'#130f15b3',1.5);
+    ctx.fillStyle='#d8c4bc';ctx.font='10px Georgia';ctx.textAlign='center';ctx.fillText('Driftwood',360,433);
+    ellipse(425,428,2.2,1.8,'#ffc7ac');
+  }
+  function update() {
+    const day=Number(slider.value);
+    label.value='Day '+String(day).padStart(3,'0');
+    slider.setAttribute('aria-valuetext','Day '+day+' of 56');
+    slider.style.setProperty('--pos',((day-1)/55*100)+'%');
+    render(day);
+  }
+  function resize() {
+    const ratio=Math.min(window.devicePixelRatio||1,2);
+    canvas.width=Math.max(1,Math.round(stage.clientWidth*ratio));
+    canvas.height=Math.max(1,Math.round(stage.clientHeight*ratio));
+    update();
+  }
+  let timer=null;
+  function stop(){
+    clearInterval(timer);timer=null;
+    play.setAttribute('aria-label','Play growth study');
+    document.querySelector('#play-icon').setAttribute('d','M4 2l9 6-9 6z');
+  }
+  play.addEventListener('click',()=>{
+    if(timer!==null){stop();return;}
+    if(+slider.value===56){slider.value=1;update();}
+    play.setAttribute('aria-label','Pause growth study');
+    document.querySelector('#play-icon').setAttribute('d','M3 2h4v12H3zM10 2h4v12h-4z');
+    timer=setInterval(()=>{slider.stepUp();update();if(+slider.value>=56)stop();},170);
+  });
+  slider.addEventListener('input',()=>{stop();update();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+  if('ResizeObserver' in window)new ResizeObserver(resize).observe(stage);
+  else window.addEventListener('resize',resize);
+  resize();
+  if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.body.classList.add('ready');
+    const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('in-view');observer.unobserve(e.target);}
+    }),{threshold:.28});
+    document.querySelectorAll('.step').forEach(el=>observer.observe(el));
+  }
+  const dialog=document.querySelector('#order-dialog');
+  const entry=document.querySelector('#order-entry');
+  const saved=document.querySelector('#order-saved');
+  const name=document.querySelector('#order-name');
+  let specimenName='';
+  try{specimenName=localStorage.getItem('driftwood.specimen.v1')||'';}catch{}
+  function showCard(persistent=true){
+    entry.hidden=true;saved.hidden=false;
+    document.querySelector('#card-summary').textContent=specimenName+' · First edition, graphite. '+(persistent?'Your specimen card is saved in this browser.':'Your specimen card is ready for this visit. Browser storage is unavailable.');
+  }
+  let persistent=true;
+  document.querySelector('#open-order').addEventListener('click',()=>{
+    if(specimenName)showCard(persistent);
+    dialog.showModal();
+  });
+  document.querySelector('#order-form').addEventListener('submit',event=>{
+    event.preventDefault();
+    specimenName=name.value.trim();
+    if(!specimenName){name.setCustomValidity('Enter a name for your card.');name.reportValidity();return;}
+    try{localStorage.setItem('driftwood.specimen.v1',specimenName);}catch{persistent=false;}
+    showCard(persistent);document.querySelector('#done').focus();
+  });
+  name.addEventListener('input',()=>name.setCustomValidity(''));
+  dialog.querySelector('.close').addEventListener('click',()=>dialog.close());
+  document.querySelector('#done').addEventListener('click',()=>dialog.close());
+})();
+</script>
+</body>
+</html>
