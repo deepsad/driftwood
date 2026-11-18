@@ -1,0 +1,1769 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#061821">
+<meta name="description" content="Driftwood is a palm-sized desk reef that turns your Spotify listening history into slowly growing coral-mineral. Fast music. Slow stone.">
+<title>Driftwood — Fast music. Slow stone.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23061821'/%3E%3Cpath d='M32 52V34M32 38C32 30 24 28 20 20M32 34C32 26 40 24 44 16M32 44C28 42 22 42 18 36M32 40C36 38 42 38 46 32' stroke='%23FF7A5C' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='20' cy='19' r='3.4' fill='%233FE0C5'/%3E%3Ccircle cx='44' cy='15' r='3.4' fill='%23FFC46B'/%3E%3C/svg%3E">
+<style>
+/* ============================================================
+   DRIFTWOOD — "The Descent" · a landing page as a dive log
+   Palette: abyss ink / lagoon teal / living coral / signal amber /
+            noctiluca magenta / bone / info blue · warm+cool neutrals
+   Type:    Didot-Bodoni display · Iowan-Palatino body · SF mono data
+   ============================================================ */
+:root{
+  --ink-950:#02070D; --ink-900:#041019; --ink-800:#061821; --ink-700:#08222E;
+  --deep:#0E3E46; --teal:#3FE0C5; --teal-hi:#8FF2E2; --teal-dim:#1E5A5E;
+  --coral:#FF7A5C; --coral-hi:#FFB49E; --coral-deep:#E85D3D;
+  --amber:#FFC46B; --magenta:#F26BB5; --bone:#F2E9DA; --sand:#C9B99B;
+  --mist:#9DB6B2; --mist-dim:#7E9793; --blue:#6BC7FF;
+  --ok:#4ADE9C; --warn:#FFC46B; --danger:#FF6B6B; --info:#6BC7FF;
+  --wood:#5E4230; --wood-hi:#7D5A3E;
+  --font-display:"Didot","Didot LT STD","Bodoni MT","Bodoni 72","Big Caslon","Playfair Display",Georgia,"Times New Roman",serif;
+  --font-body:"Iowan Old Style","Palatino Linotype",Palatino,Charter,"Bitstream Charter",Georgia,serif;
+  --font-mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Cascadia Mono","Segoe UI Mono",monospace;
+  --nav-h:64px; --wrap:1180px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scrollbar-color:var(--teal-dim) var(--ink-900);scrollbar-width:thin}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--ink-900)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--teal-dim),#7A4636);border-radius:8px;border:2px solid var(--ink-900)}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--teal),var(--coral))}
+::selection{background:var(--coral);color:var(--ink-900)}
+body{
+  background:var(--ink-900); color:var(--bone);
+  font-family:var(--font-body); font-size:17px; line-height:1.65;
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+}
+img,svg,canvas{display:block;max-width:100%}
+a{color:var(--teal);text-decoration:none}
+a:hover{color:var(--teal-hi)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;touch-action:manipulation}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:3px}
+.btn-primary:focus-visible{outline-color:var(--bone)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip-link{position:fixed;top:-60px;left:16px;z-index:200;background:var(--coral);color:var(--ink-900);font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;padding:10px 16px;border-radius:8px;transition:top .2s}
+.skip-link:focus{top:12px;color:var(--ink-900)}
+.mono{font-family:var(--font-mono)}
+
+/* ---------- fixed atmosphere layers ---------- */
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+#bg .layer{position:absolute;inset:0;will-change:opacity}
+#bg-l0{background:radial-gradient(120% 70% at 50% -12%,rgba(63,224,197,.17),transparent 60%),linear-gradient(180deg,#0D3540 0%,#092833 45%,#07202B 100%)}
+#bg-l1{opacity:0;background:radial-gradient(70% 50% at 82% 18%,rgba(107,199,255,.08),transparent 65%),linear-gradient(180deg,#08222E 0%,#061B27 55%,#051722 100%)}
+#bg-l2{opacity:0;background:radial-gradient(60% 55% at 12% 88%,rgba(255,122,92,.11),transparent 62%),radial-gradient(55% 45% at 88% 28%,rgba(242,107,181,.07),transparent 60%),linear-gradient(180deg,#071B26 0%,#081722 55%,#0A141E 100%)}
+#bg-l3{opacity:0;background:radial-gradient(90% 60% at 50% 112%,rgba(255,122,92,.15),transparent 62%),radial-gradient(45% 40% at 18% 18%,rgba(63,224,197,.06),transparent 60%),linear-gradient(180deg,#050E17 0%,#030A12 55%,#02060C 100%)}
+#snow{position:fixed;inset:0;z-index:1;pointer-events:none}
+#grain{position:fixed;inset:-40px;z-index:60;pointer-events:none;opacity:.055;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+#vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 62%,rgba(2,7,13,.5) 100%)}
+
+/* ---------- depth rail ---------- */
+#rail{position:fixed;left:22px;top:20vh;height:60vh;width:36px;z-index:40;pointer-events:none;display:none}
+#rail .line{position:absolute;left:16px;top:0;bottom:0;width:1px;background:rgba(157,182,178,.22)}
+#rail .fill{position:absolute;left:15px;top:0;width:3px;height:100%;border-radius:3px;background:linear-gradient(180deg,var(--teal),var(--amber) 55%,var(--coral));transform-origin:top;transform:scaleY(0)}
+#rail .tick{position:absolute;left:10px;width:13px;height:1px;background:rgba(157,182,178,.35)}
+#rail .tick i{position:absolute;left:18px;top:-6px;font:400 9px/1 var(--font-mono);letter-spacing:.08em;color:var(--mist-dim);font-style:normal;white-space:nowrap}
+#rail-dot{position:absolute;left:11px;top:0;width:11px;height:11px;border-radius:50%;background:var(--coral);box-shadow:0 0 12px rgba(255,122,92,.8),0 0 3px var(--coral-hi);transform:translateY(-5px)}
+#rail-label{position:absolute;left:2px;top:calc(100% + 18px);writing-mode:vertical-rl;font:400 10px/1 var(--font-mono);letter-spacing:.28em;color:var(--mist);text-transform:uppercase}
+@media(min-width:1320px){#rail{display:block}}
+
+/* ---------- nav ---------- */
+#site-nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;display:flex;align-items:center;transition:background .35s,border-color .35s,backdrop-filter .35s;border-bottom:1px solid transparent}
+#site-nav.scrolled{background:rgba(4,16,25,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom-color:rgba(63,224,197,.14)}
+.nav-in{width:min(var(--wrap),92vw);margin:0 auto;display:flex;align-items:center;gap:26px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--bone)}
+.brand:hover{color:var(--bone)}
+.brand svg{width:26px;height:26px;flex:none}
+.brand .word{font-family:var(--font-display);font-size:21px;letter-spacing:.01em}
+.brand .no{font:400 9px/1 var(--font-mono);letter-spacing:.14em;color:var(--teal);border:1px solid rgba(63,224,197,.4);border-radius:4px;padding:3px 5px;transform:translateY(-6px)}
+.nav-links{display:flex;gap:22px;margin-left:8px}
+.nav-links a{position:relative;font:400 11px/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mist);padding:8px 2px}
+.nav-links a::after{content:"";position:absolute;left:50%;bottom:0;width:4px;height:4px;border-radius:50%;background:var(--coral);transform:translate(-50%,4px) scale(0);transition:transform .3s var(--ease-out)}
+.nav-links a:hover{color:var(--bone)}
+.nav-links a[aria-current="true"]{color:var(--bone)}
+.nav-links a[aria-current="true"]::after{transform:translate(-50%,0) scale(1)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+#depth-chip{font:400 11px/1 var(--font-mono);letter-spacing:.1em;color:var(--teal);border:1px solid rgba(63,224,197,.28);background:rgba(63,224,197,.06);border-radius:6px;padding:7px 9px;min-width:74px;text-align:center}
+#sound-btn{width:38px;height:38px;border-radius:9px;border:1px solid rgba(157,182,178,.3);display:grid;place-items:center;color:var(--mist);transition:border-color .25s,color .25s,background .25s}
+#sound-btn:hover{border-color:var(--teal);color:var(--teal)}
+#sound-btn[aria-pressed="true"]{color:var(--teal);border-color:rgba(63,224,197,.5);background:rgba(63,224,197,.07)}
+#sound-btn .w1,#sound-btn .w2{opacity:0;transition:opacity .25s}
+#sound-btn[aria-pressed="true"] .w1{opacity:1}
+#sound-btn[aria-pressed="true"] .w2{opacity:1}
+#sound-btn.audible .w1{animation:wave 1.6s ease-in-out infinite}
+#sound-btn.audible .w2{animation:wave 1.6s ease-in-out .3s infinite}
+#sound-btn .slash{opacity:1;transition:opacity .25s}
+#sound-btn[aria-pressed="true"] .slash{opacity:0}
+@keyframes wave{0%,100%{opacity:.35}50%{opacity:1}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font:700 12px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;border-radius:10px;padding:14px 20px;transition:transform .25s var(--ease-out),box-shadow .25s,background .25s,border-color .25s,color .25s;white-space:nowrap;touch-action:manipulation}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn-primary{background:linear-gradient(135deg,var(--coral) 0%,var(--coral-deep) 100%);color:#1A0E08;box-shadow:0 4px 18px rgba(232,93,61,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,122,92,.42);color:#1A0E08}
+.btn-ghost{border:1px solid rgba(242,233,218,.28);color:var(--bone)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.btn-nav{padding:11px 16px}
+#menu-btn{display:none;width:38px;height:38px;border-radius:9px;border:1px solid rgba(157,182,178,.3);color:var(--bone);place-items:center}
+#menu-btn svg line{transition:transform .3s var(--ease-out),opacity .2s;transform-origin:center}
+#menu-btn[aria-expanded="true"] .l1{transform:translateY(3.5px) rotate(45deg)}
+#menu-btn[aria-expanded="true"] .l2{transform:translateY(-3.5px) rotate(-45deg)}
+#mobile-menu{position:fixed;top:var(--nav-h);left:0;right:0;z-index:99;background:rgba(4,16,25,.96);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(63,224,197,.18);padding:14px 5vw 22px;display:none}
+#mobile-menu.open{display:block}
+#mobile-menu a{display:block;font-family:var(--font-display);font-size:24px;color:var(--bone);padding:12px 4px;border-bottom:1px dashed rgba(157,182,178,.18)}
+#mobile-menu a small{font:400 10px/1 var(--font-mono);letter-spacing:.2em;color:var(--teal);display:block;margin-bottom:3px}
+#mobile-menu a[aria-current="true"]{color:var(--coral-hi)}
+@media(max-width:920px){.nav-links{display:none}#menu-btn{display:grid}}
+@media(max-width:560px){
+  #depth-chip{display:none}
+  .btn-nav .long{display:none}
+  .nav-in{gap:10px;width:94vw}
+  .brand .word{font-size:18px}
+  .brand .no{display:none}
+  .btn-nav{padding:10px 12px;font-size:10px}
+  .nav-right{gap:8px}
+}
+
+/* ---------- shared section chrome ---------- */
+main{position:relative;z-index:3}
+section{position:relative;padding:clamp(88px,12vh,150px) 0;scroll-margin-top:calc(var(--nav-h) + 14px)}
+.wrap{width:min(var(--wrap),92vw);margin:0 auto}
+.eyebrow{display:flex;align-items:center;gap:14px;font:400 11px/1 var(--font-mono);letter-spacing:.26em;text-transform:uppercase;color:var(--teal);margin-bottom:26px}
+.eyebrow::before{content:"";width:34px;height:1px;background:linear-gradient(90deg,var(--teal),transparent)}
+.eyebrow .dep{color:var(--mist-dim);letter-spacing:.18em}
+h1,h2,h3{font-family:var(--font-display);font-weight:400;line-height:1.04;letter-spacing:-.015em}
+h2{font-size:clamp(2.3rem,4.8vw,3.7rem);margin-bottom:20px}
+h2 em,h1 em{font-style:italic}
+.lead{color:var(--mist);max-width:56ch;font-size:clamp(1.02rem,1.4vw,1.14rem)}
+.acc-teal{color:var(--teal)} .acc-coral{color:var(--coral)} .acc-amber{color:var(--amber)} .acc-blue{color:var(--blue)} .acc-magenta{color:var(--magenta)}
+
+/* scroll reveals (JS-gated so no-JS still reads) */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- HERO / THE SURFACE ---------- */
+#top{min-height:100vh;min-height:100svh;padding-top:calc(var(--nav-h) + clamp(30px,6vh,72px));padding-bottom:70px;display:flex;align-items:center}
+.surface-line{position:absolute;top:var(--nav-h);left:0;right:0;height:52px;overflow:hidden;pointer-events:none;opacity:.5}
+.surface-line svg{position:absolute;top:0;left:0;width:200%;height:52px}
+.surface-line .wA{animation:drift 14s linear infinite}
+.surface-line .wB{animation:drift 23s linear infinite reverse;opacity:.5}
+@keyframes drift{to{transform:translateX(-50%)}}
+.hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(30px,4.5vw,64px);align-items:center;width:100%}
+.hero-copy{will-change:transform}
+.hero-eyebrow{font:400 11px/1.6 var(--font-mono);letter-spacing:.3em;color:var(--amber);text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 10px var(--coral);animation:beacon 2.6s ease-in-out infinite}
+@keyframes beacon{0%,100%{opacity:.5}50%{opacity:1}}
+h1{font-size:clamp(3rem,7vw,5.9rem);color:var(--bone)}
+h1 .line{display:block;overflow:hidden;padding-bottom:.06em}
+h1 .line-in{display:block}
+.js h1 .line-in{transform:translateY(112%);transition:transform 1.1s var(--ease-out)}
+.js body.loaded h1 .line-in{transform:none}
+h1 .l2 .line-in{transition-delay:.12s}
+h1 em{background:linear-gradient(100deg,var(--coral) 15%,var(--amber) 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
+@supports not (background-clip:text){h1 em{color:var(--coral);background:none}}
+.h1-wave{width:min(300px,60%);height:14px;margin-top:6px;color:var(--teal)}
+.h1-wave path{stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset 1.6s ease .7s}
+body.loaded .h1-wave path{stroke-dashoffset:0}
+.hero-sub{color:var(--mist);margin:26px 0 32px;max-width:46ch;font-size:clamp(1.02rem,1.5vw,1.16rem)}
+.hero-sub b{color:var(--bone);font-weight:400}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+.hero-stats{display:flex;gap:0;flex-wrap:wrap;font:400 11px/1.5 var(--font-mono);letter-spacing:.14em;color:var(--mist-dim);text-transform:uppercase}
+.hero-stats span{padding:0 16px;border-left:1px dashed rgba(157,182,178,.3)}
+.hero-stats span:first-child{padding-left:0;border-left:0}
+.hero-stats b{color:var(--teal);font-weight:400}
+.js .hero-anim{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+.js body.loaded .hero-anim{opacity:1;transform:none}
+.hero-eyebrow.hero-anim{transition-delay:.05s}.hero-sub.hero-anim{transition-delay:.4s}.hero-ctas.hero-anim{transition-delay:.55s}.hero-stats.hero-anim{transition-delay:.7s}
+
+/* stage + console */
+.hero-device{will-change:transform}
+#stage{position:relative;aspect-ratio:10/10.4;max-width:560px;margin:0 auto;width:100%;border-radius:18px}
+.js .hero-device{opacity:0;transform:translateY(24px) scale(.985);transition:opacity 1.1s var(--ease-out) .3s,transform 1.1s var(--ease-out) .3s}
+.js body.loaded .hero-device{opacity:1;transform:none}
+#reef{width:100%;height:100%;cursor:pointer;border-radius:18px}
+.stage-tag{position:absolute;top:10px;right:14px;font:400 9px/1 var(--font-mono);letter-spacing:.24em;color:var(--mist-dim);text-transform:uppercase;pointer-events:none}
+#console{position:relative;margin:-12px auto 0;max-width:560px;background:rgba(6,24,32,.78);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(242,233,218,.13);border-radius:16px;padding:16px 18px 14px;box-shadow:0 24px 60px rgba(2,7,13,.55)}
+#console::before{content:"";position:absolute;top:0;left:18px;right:18px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--teal),var(--amber),var(--magenta),var(--bone),var(--coral))}
+.con-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px 12px;flex-wrap:wrap;font:400 10px/1.6 var(--font-mono);letter-spacing:.22em;color:var(--mist-dim);text-transform:uppercase;margin-bottom:12px}
+.con-read{color:var(--teal);letter-spacing:.12em}
+.con-read b{color:var(--bone);font-weight:400}
+.np{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px dashed rgba(157,182,178,.2)}
+#np-art{width:46px;height:46px;flex:none;border-radius:9px;overflow:hidden;border:1px solid rgba(242,233,218,.14)}
+.np-meta{min-width:0;flex:1}
+.np-label{font:400 9px/1 var(--font-mono);letter-spacing:.26em;color:var(--mist-dim);text-transform:uppercase;margin-bottom:4px}
+#np-title{font-family:var(--font-display);font-style:italic;font-size:18px;line-height:1.15;color:var(--bone);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#np-artist{font:400 10px/1.4 var(--font-mono);letter-spacing:.1em;color:var(--mist);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#np-genre{flex:none;font:700 9px/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:#12202A;border-radius:5px;padding:5px 7px;background:var(--teal)}
+.np-bar{height:3px;border-radius:3px;background:rgba(157,182,178,.18);margin:10px 0 12px;overflow:hidden}
+#np-bar-fill{display:block;height:100%;width:100%;border-radius:3px;background:var(--teal);transform-origin:left;transform:scaleX(0)}
+.con-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.con-btn{display:inline-flex;align-items:center;gap:7px;font:700 11px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;border-radius:9px;padding:10px 14px;border:1px solid rgba(157,182,178,.3);color:var(--bone);transition:border-color .2s,color .2s,background .2s,transform .2s}
+.con-btn:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-1px)}
+.con-btn.primary{background:var(--coral);border-color:var(--coral);color:#1A0E08}
+.con-btn.primary:hover{background:var(--coral-hi);border-color:var(--coral-hi);color:#1A0E08}
+.con-btn.attn{animation:attn 1.4s ease-in-out infinite;border-color:var(--warn);color:var(--warn)}
+@keyframes attn{0%,100%{box-shadow:0 0 0 0 rgba(255,196,107,0)}50%{box-shadow:0 0 0 5px rgba(255,196,107,.18)}}
+.feed-label{font:400 9px/1 var(--font-mono);letter-spacing:.24em;color:var(--mist-dim);text-transform:uppercase;margin-right:2px}
+.chip{font:400 10px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(157,182,178,.32);border-radius:999px;padding:7px 11px;color:var(--mist);transition:all .2s}
+.chip:hover{color:var(--bone);border-color:var(--bone);transform:translateY(-1px)}
+.chip[aria-pressed="true"]{background:var(--cc,var(--teal));border-color:var(--cc,var(--teal));color:#12202A;font-weight:700}
+.con-sliders{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:13px 0 11px}
+.slider-block label{display:flex;justify-content:space-between;font:400 9px/1 var(--font-mono);letter-spacing:.22em;color:var(--mist-dim);text-transform:uppercase;margin-bottom:7px}
+.slider-block label output{color:var(--teal);letter-spacing:.1em}
+input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:linear-gradient(to right,var(--teal) var(--p,50%),rgba(157,182,178,.22) var(--p,50%));cursor:pointer}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--bone);border:3px solid var(--teal-dim);box-shadow:0 0 8px rgba(63,224,197,.5);transition:transform .15s}
+input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+input[type="range"]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--bone);border:3px solid var(--teal-dim);box-shadow:0 0 8px rgba(63,224,197,.5)}
+.con-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px dashed rgba(157,182,178,.2);padding-top:11px}
+#deposit-line{font:400 10px/1.5 var(--font-mono);letter-spacing:.06em;color:var(--mist);min-width:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#deposit-line b{color:var(--ok);font-weight:400}
+#deposit-line.warn b{color:var(--warn)}
+.con-hint{font:400 10px/1.5 var(--font-mono);letter-spacing:.06em;color:var(--mist-dim)}
+#tap-hint{color:var(--teal);text-decoration:underline dotted;text-underline-offset:3px;font:inherit}
+#tap-hint:hover{color:var(--teal-hi)}
+@media(max-width:1020px){
+  .hero-grid{grid-template-columns:1fr}
+  #top{padding-top:calc(var(--nav-h) + 34px)}
+  .hero-copy{text-align:left;max-width:640px}
+  #stage,#console{max-width:540px}
+}
+@media(max-width:480px){.con-sliders{grid-template-columns:1fr}.hero-stats span{padding:0 10px}}
+
+/* ---------- HOW / THE DESCENT ---------- */
+.how-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(36px,5vw,80px)}
+.how-sticky{position:sticky;top:calc(var(--nav-h) + 40px);align-self:start}
+.core-wrap{display:flex;gap:22px;align-items:flex-end;margin-top:38px}
+#core-svg{width:74px;height:210px;flex:none}
+#core-svg .sed{opacity:.14;transition:opacity .7s ease,filter .7s}
+#core-svg .sed.filled{opacity:1}
+.core-meta{font:400 10px/1.9 var(--font-mono);letter-spacing:.2em;color:var(--mist-dim);text-transform:uppercase}
+#step-num{display:block;font-family:var(--font-display);font-size:52px;line-height:1;color:var(--teal);letter-spacing:0;margin:4px 0 2px}
+.steps{position:relative;padding-left:34px}
+.steps::before{content:"";position:absolute;left:8px;top:10px;bottom:10px;width:1px;background:rgba(157,182,178,.2)}
+#steps-fill{position:absolute;left:7px;top:10px;width:3px;border-radius:3px;height:calc(100% - 20px);background:linear-gradient(180deg,var(--teal),var(--coral));transform-origin:top;transform:scaleY(0)}
+.step{position:relative;padding:0 0 clamp(44px,6vh,72px)}
+.step:last-child{padding-bottom:0}
+.step::before{content:"";position:absolute;left:-31px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--ink-800);border:2px solid var(--mist-dim);transition:all .5s}
+.step.active::before{border-color:var(--coral);background:var(--coral);box-shadow:0 0 14px rgba(255,122,92,.7)}
+.step-no{font:400 10px/1 var(--font-mono);letter-spacing:.3em;color:var(--teal);text-transform:uppercase;margin-bottom:10px}
+.step h3{font-size:clamp(1.5rem,2.4vw,2rem);margin-bottom:12px;color:var(--bone)}
+.step p{color:var(--mist);max-width:52ch}
+.step p i{color:var(--sand)}
+.step-diagram{margin-top:20px;color:var(--teal);opacity:.9}
+.step-diagram svg{width:min(240px,70%);height:auto}
+@media(max-width:900px){
+  .how-grid{grid-template-columns:1fr}
+  .how-sticky{position:static}
+  .core-wrap{margin-top:24px}
+  #core-svg{height:150px;width:54px}
+}
+
+/* ---------- SPECIES / THE REEF ---------- */
+.ledger{margin-top:44px;border-top:1px solid rgba(157,182,178,.22)}
+.ledger-head,.sp-head{display:grid;grid-template-columns:3.2rem 84px minmax(0,1.5fr) minmax(0,1.1fr) 8rem 6.4rem 2rem;gap:14px;align-items:center}
+.ledger-head{font:400 9px/1 var(--font-mono);letter-spacing:.24em;color:var(--mist-dim);text-transform:uppercase;padding:12px 10px;border-bottom:1px dashed rgba(157,182,178,.25)}
+.sp{border-bottom:1px dashed rgba(157,182,178,.22);border-left:2px solid transparent;transition:border-color .3s,background .3s}
+.sp.open{border-left-color:var(--gc);background:rgba(63,224,197,.03)}
+.sp-head{width:100%;text-align:left;padding:18px 10px;transition:background .25s}
+.sp-head:hover{background:rgba(63,224,197,.05)}
+.sp-no{font:400 11px/1 var(--font-mono);color:var(--mist-dim);letter-spacing:.1em}
+.sp-spec{width:64px;height:64px;color:var(--gc)}
+.sp-spec .sway{transform-origin:32px 60px;animation:sway 6s ease-in-out infinite}
+.sp-head:hover .sway{animation-duration:2.4s}
+.sp-spec .tip{animation:tipglow 3s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2.4deg)}}
+@keyframes tipglow{0%,100%{opacity:.45}50%{opacity:1}}
+.sp-name{font-family:var(--font-display);font-size:clamp(1.2rem,2vw,1.55rem);color:var(--bone);line-height:1.1}
+.sp-latin{display:block;font:italic 400 12px/1.6 var(--font-body);color:var(--gc);letter-spacing:.02em}
+.sp-feeds{font:400 11px/1.6 var(--font-mono);color:var(--mist);letter-spacing:.04em}
+.sp-rate{font:400 11px/1.4 var(--font-mono);color:var(--bone)}
+.sp-rate .bar{display:block;height:3px;border-radius:3px;background:rgba(157,182,178,.18);margin-top:6px;overflow:hidden}
+.sp-rate .bar i{display:block;height:100%;background:var(--gc);border-radius:3px;width:var(--rw)}
+.sp-hue{display:flex;align-items:center;gap:8px;font:400 10px/1.3 var(--font-mono);color:var(--mist);letter-spacing:.06em;text-transform:uppercase}
+.sp-hue i{flex:none;width:12px;height:12px;border-radius:50%;background:var(--gc);box-shadow:0 0 8px var(--gc)}
+.sp-chev{color:var(--mist-dim);transition:transform .4s var(--ease-out),color .3s;justify-self:end}
+.sp.open .sp-chev{transform:rotate(180deg);color:var(--gc)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease-out),visibility 0s .5s;visibility:hidden}
+.open .acc-panel{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .5s var(--ease-out),visibility 0s 0s}
+.acc-inner{overflow:hidden}
+.sp-notes{padding:4px 10px 26px calc(3.2rem + 84px + 28px);color:var(--mist);max-width:72ch}
+.sp-notes p{margin-bottom:16px}
+.sp-notes p b{color:var(--bone);font-weight:400}
+.data-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.data-chips span{font:400 9px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(157,182,178,.3);color:var(--mist);border-radius:5px;padding:5px 8px}
+.data-chips span b{color:var(--gc);font-weight:400}
+.feed-reef{font:700 10px/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gc);border:1px solid var(--gc);border-radius:8px;padding:9px 13px;transition:all .2s}
+.feed-reef:hover{background:var(--gc);color:#12202A;transform:translateY(-1px)}
+@media(max-width:900px){
+  .ledger-head{display:none}
+  .sp-head{grid-template-columns:56px minmax(0,1fr) 1.6rem;gap:14px}
+  .sp-no,.sp-feeds,.sp-rate,.sp-hue{display:none}
+  .sp-spec{width:52px;height:52px}
+  .sp-notes{padding-left:10px}
+}
+/* spec sheet */
+.specs{margin-top:clamp(60px,9vh,100px)}
+.specs h3{font-size:clamp(1.6rem,2.6vw,2.2rem);margin-bottom:8px}
+.specs .sub{color:var(--mist-dim);font:italic 400 15px/1.6 var(--font-body);margin-bottom:34px}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,64px)}
+.spec-col h4{font:400 10px/1 var(--font-mono);letter-spacing:.3em;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(157,182,178,.25)}
+.spec-col.hw h4{color:var(--amber)} .spec-col.sw h4{color:var(--blue)}
+.spec-row{display:flex;align-items:baseline;gap:10px;font:400 12px/2.3 var(--font-mono);letter-spacing:.03em}
+.spec-row .k{color:var(--mist-dim);text-transform:uppercase;font-size:10px;letter-spacing:.18em;flex:none}
+.spec-row .dots{flex:1;border-bottom:1px dotted rgba(157,182,178,.35);transform:translateY(-4px)}
+.spec-row .v{color:var(--bone);text-align:right}
+.spec-note{margin-top:26px;font:italic 400 14px/1.7 var(--font-body);color:var(--sand)}
+@media(max-width:700px){.spec-grid{grid-template-columns:1fr}}
+
+/* ---------- FIELD NOTES ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px);margin-top:52px}
+.postcard{position:relative;background:linear-gradient(160deg,#F6EEDF,#EADFCB);color:#1E2A2E;border-radius:6px;padding:26px 24px 22px;transform:rotate(var(--rot));box-shadow:0 24px 50px rgba(2,7,13,.55);transition:transform .5s var(--ease-out),box-shadow .5s}
+.postcard:hover{transform:rotate(0deg) translateY(-8px) scale(1.02);box-shadow:0 34px 70px rgba(2,7,13,.65)}
+.postcard::before,.postcard::after{content:"";position:absolute;width:74px;height:22px;background:rgba(63,224,197,.28);border-left:1px dashed rgba(30,42,46,.2);border-right:1px dashed rgba(30,42,46,.2);top:-11px}
+.postcard::before{left:-18px;transform:rotate(-38deg)}
+.postcard::after{right:-18px;transform:rotate(38deg)}
+.pc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:16px}
+.pc-mark{font:400 9px/1.7 var(--font-mono);letter-spacing:.2em;color:#5A6B66;text-transform:uppercase}
+.pc-mark svg{width:64px;height:34px;color:#8A7354;margin-bottom:4px}
+.stamp{flex:none;width:52px;height:60px;color:var(--pc,var(--coral-deep))}
+.postcard blockquote{font:italic 400 clamp(1.02rem,1.4vw,1.14rem)/1.55 var(--font-body);color:#22313A;margin-bottom:18px}
+.pc-attr{display:flex;justify-content:space-between;align-items:center;gap:8px;border-top:1px dashed rgba(30,42,46,.3);padding-top:12px;font:400 10px/1.5 var(--font-mono);letter-spacing:.1em;color:#5A6B66;text-transform:uppercase}
+.pc-attr .grows{color:var(--pc,var(--coral-deep))}
+.press{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:clamp(56px,8vh,84px);padding-top:34px;border-top:1px dashed rgba(157,182,178,.25)}
+.press div{font:italic 400 15px/1.6 var(--font-body);color:var(--mist)}
+.press b{display:block;font:400 9px/1 var(--font-mono);letter-spacing:.28em;color:var(--teal);text-transform:uppercase;margin-bottom:10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:clamp(56px,8vh,84px)}
+.stat b{display:block;font-family:var(--font-display);font-size:clamp(2.4rem,4.4vw,3.6rem);line-height:1;letter-spacing:-.02em}
+.stat span{display:block;font:400 10px/1.7 var(--font-mono);letter-spacing:.2em;color:var(--mist-dim);text-transform:uppercase;margin-top:10px}
+.stat:nth-child(1) b{color:var(--coral)}.stat:nth-child(2) b{color:var(--amber)}.stat:nth-child(3) b{color:var(--teal)}.stat:nth-child(4) b{color:var(--bone)}
+@media(max-width:900px){.cards{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}.postcard{--rot:0deg}.press{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr;gap:34px 20px}}
+@media(max-width:520px){.press{grid-template-columns:1fr}}
+
+/* ---------- SOUNDINGS / FAQ ---------- */
+.faq{max-width:760px;margin-top:36px}
+.faq-item{border-bottom:1px dashed rgba(157,182,178,.25)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;text-align:left;padding:22px 4px;font-family:var(--font-display);font-size:clamp(1.15rem,2vw,1.45rem);color:var(--bone);transition:color .25s}
+.faq-q:hover{color:var(--teal-hi)}
+.faq-q .pm{flex:none;width:22px;height:22px;color:var(--blue);transition:transform .4s var(--ease-out)}
+.faq-item.open .pm{transform:rotate(45deg)}
+.faq-a{padding:0 4px 24px;color:var(--mist);max-width:62ch}
+.faq-a i{color:var(--sand)}
+
+/* ---------- PRE-ORDER / THE SEABED ---------- */
+.cta-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(36px,5vw,80px);align-items:start}
+.cta-copy h2{font-size:clamp(2.6rem,5.4vw,4.3rem)}
+.cta-copy .lead{margin-bottom:30px}
+.ticks{list-style:none;margin-bottom:30px}
+.ticks li{display:flex;gap:12px;align-items:baseline;font:400 12px/2.4 var(--font-mono);letter-spacing:.08em;color:var(--mist);text-transform:uppercase}
+.ticks svg{flex:none;width:14px;height:14px;color:var(--ok);transform:translateY(2px)}
+.tide-chip{display:inline-block;font:400 10px/1 var(--font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--amber);border:1px dashed rgba(255,196,107,.5);border-radius:999px;padding:9px 15px}
+.order-card{position:relative;background:linear-gradient(170deg,rgba(14,42,54,.85),rgba(6,20,28,.92));border:1px solid rgba(242,233,218,.15);border-radius:18px;padding:30px clamp(22px,3vw,36px) 30px;box-shadow:0 30px 80px rgba(2,7,13,.6);overflow:hidden}
+.order-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--amber),var(--magenta),var(--coral))}
+.oc-head{display:flex;justify-content:space-between;align-items:baseline;gap:6px 12px;flex-wrap:wrap;font:400 10px/1.6 var(--font-mono);letter-spacing:.26em;color:var(--mist-dim);text-transform:uppercase;margin-bottom:20px}
+.oc-head b{color:var(--teal);font-weight:400}
+.price-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+.price{font-family:var(--font-display);font-size:clamp(3rem,5vw,4rem);line-height:1;color:var(--bone)}
+.price-sub{font:400 11px/1.6 var(--font-mono);letter-spacing:.12em;color:var(--coral);text-transform:uppercase}
+.oc-ships{font:400 11px/1.8 var(--font-mono);letter-spacing:.14em;color:var(--mist);text-transform:uppercase;margin-bottom:20px}
+.includes{list-style:none;border-top:1px dashed rgba(157,182,178,.3);border-bottom:1px dashed rgba(157,182,178,.3);padding:16px 0;margin-bottom:22px}
+.includes li{font:400 12px/2.2 var(--font-mono);letter-spacing:.04em;color:var(--mist)}
+.includes li::before{content:"—";color:var(--amber);margin-right:10px}
+.field{margin-bottom:16px}
+.field label{display:block;font:400 9px/1 var(--font-mono);letter-spacing:.26em;color:var(--mist-dim);text-transform:uppercase;margin-bottom:8px}
+.field input[type="email"],.field select{width:100%;font:400 14px/1.4 var(--font-mono);color:var(--bone);background:rgba(4,16,25,.7);border:1px solid rgba(157,182,178,.35);border-radius:10px;padding:13px 14px;transition:border-color .25s,box-shadow .25s;-webkit-appearance:none;appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233FE0C5' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+.field input:focus,.field select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(63,224,197,.18)}
+.field input[aria-invalid="true"]{border-color:var(--danger);box-shadow:0 0 0 3px rgba(255,107,107,.15)}
+.check{display:flex;gap:10px;align-items:flex-start;font:400 11px/1.7 var(--font-mono);color:var(--mist);cursor:pointer;margin-bottom:20px}
+.check input{margin-top:3px;accent-color:var(--coral);width:15px;height:15px;cursor:pointer}
+#order-btn{width:100%;padding:16px;position:relative}
+#order-btn.loading{pointer-events:none;opacity:.8}
+#order-btn.loading .lbl{visibility:hidden}
+#order-btn .spin{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;border:2px solid rgba(26,14,8,.3);border-top-color:#1A0E08;opacity:0;animation:spin .7s linear infinite}
+#order-btn.loading .spin{opacity:1}
+@keyframes spin{to{transform:rotate(360deg)}}
+#form-err{font:400 11px/1.6 var(--font-mono);color:var(--danger);margin-top:10px;min-height:1em}
+.oc-fine{font:italic 400 13px/1.7 var(--font-body);color:var(--sand);margin-top:16px;text-align:center}
+.shake{animation:shake .4s ease}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+#order-success{text-align:center;padding:14px 0 4px}
+#order-success svg{width:56px;height:56px;margin:0 auto 18px;color:var(--ok)}
+#order-success h3{font-size:1.9rem;margin-bottom:12px}
+#succ-meta{font:400 10px/2 var(--font-mono);letter-spacing:.16em;color:var(--teal);text-transform:uppercase;margin-bottom:16px;word-break:break-word}
+#order-success p{color:var(--mist);font-size:15px;max-width:38ch;margin:0 auto 22px}
+#burst{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#burst i{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);border-radius:50%;background:var(--c);opacity:.95;animation:rise .95s var(--ease-out) forwards}
+@keyframes rise{to{transform:translate(var(--tx),var(--ty)) scale(.1);opacity:0}}
+@media(max-width:980px){.cta-grid{grid-template-columns:1fr}.order-card{max-width:560px;margin-inline:auto}}
+
+/* ---------- FOOTER / SEABED ---------- */
+footer{position:relative;z-index:3;background:linear-gradient(180deg,rgba(10,22,26,0),rgba(12,24,26,.9) 120px,#0B1A1C);padding:0 0 44px;margin-top:-1px}
+.seabed-art{width:100%;height:110px;color:var(--sand)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;padding:26px 0 40px;border-bottom:1px dashed rgba(201,185,155,.25)}
+.foot-brand .word{font-family:var(--font-display);font-size:26px}
+.foot-brand p{font:italic 400 15px/1.7 var(--font-body);color:var(--sand);margin-top:8px}
+.foot-col h4{font:400 9px/1 var(--font-mono);letter-spacing:.3em;color:var(--mist-dim);text-transform:uppercase;margin-bottom:14px}
+.foot-col a,.foot-col button{display:block;font:400 12px/2.3 var(--font-mono);letter-spacing:.06em;color:var(--mist);text-align:left;padding:0}
+.foot-col a:hover,.foot-col button:hover{color:var(--teal)}
+.seabed-note{text-align:center;font:400 10px/1 var(--font-mono);letter-spacing:.3em;color:var(--sand);text-transform:uppercase;padding:34px 0 26px}
+.fine{color:var(--mist-dim);font:400 11px/1.9 var(--font-mono);letter-spacing:.03em;max-width:78ch;margin:0 auto;text-align:center}
+.fine a{color:var(--mist)}
+@media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.15s !important}
+  .js .rv,.js .hero-anim,.js .hero-device,.js h1 .line-in{opacity:1;transform:none}
+  .h1-wave path{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js');</script>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- atmosphere -->
+<div id="bg" aria-hidden="true">
+  <div class="layer" id="bg-l0"></div>
+  <div class="layer" id="bg-l1"></div>
+  <div class="layer" id="bg-l2"></div>
+  <div class="layer" id="bg-l3"></div>
+</div>
+<canvas id="snow" aria-hidden="true"></canvas>
+<div id="vignette" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
+
+<!-- depth rail -->
+<div id="rail" aria-hidden="true">
+  <div class="line"></div>
+  <div class="fill" id="rail-fill"></div>
+  <div class="tick" style="top:0%"><i>0</i></div>
+  <div class="tick" style="top:24%"><i>−8</i></div>
+  <div class="tick" style="top:50%"><i>−17</i></div>
+  <div class="tick" style="top:76%"><i>−26</i></div>
+  <div class="tick" style="top:100%"><i>−34</i></div>
+  <div id="rail-dot"></div>
+  <div id="rail-label">The Surface</div>
+</div>
+
+<!-- nav -->
+<header>
+  <nav id="site-nav" aria-label="Primary">
+    <div class="nav-in">
+      <a class="brand" href="#top" aria-label="Driftwood — back to the surface">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 54V34M32 38C32 30 24 28 20 20M32 34C32 26 40 24 44 16M32 44C28 42 22 42 18 36M32 40C36 38 42 38 46 32" stroke="#FF7A5C" stroke-width="4.5" stroke-linecap="round" fill="none"/><circle cx="20" cy="19" r="3.6" fill="#3FE0C5"/><circle cx="44" cy="15" r="3.6" fill="#FFC46B"/><circle cx="46" cy="31" r="3" fill="#F26BB5"/></svg>
+        <span class="word">Driftwood</span><span class="no">№ 01</span>
+      </a>
+      <div class="nav-links">
+        <a href="#descent" data-sec="descent">The Descent</a>
+        <a href="#species" data-sec="species">Species</a>
+        <a href="#notes" data-sec="notes">Field Notes</a>
+        <a href="#soundings" data-sec="soundings">Soundings</a>
+      </div>
+      <div class="nav-right">
+        <span id="depth-chip" aria-hidden="true">−0.0 m</span>
+        <button id="sound-btn" aria-pressed="true" aria-label="Sound on — mute the sea" title="Sound wakes on your first click. Toggle to mute everything.">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"/>
+            <path class="w1" d="M16 9.5c1.2 1.4 1.2 3.6 0 5"/>
+            <path class="w2" d="M18.6 7.2c2.3 2.7 2.3 6.9 0 9.6"/>
+            <line class="slash" x1="16" y1="9" x2="21" y2="15"/>
+          </svg>
+        </button>
+        <a class="btn btn-primary btn-nav" href="#preorder">Reserve<span class="long">&nbsp;— $149</span></a>
+        <button id="menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <svg width="18" height="16" viewBox="0 0 18 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <line class="l1" x1="1" y1="4.5" x2="17" y2="4.5"/>
+            <line class="l2" x1="1" y1="11.5" x2="17" y2="11.5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div id="mobile-menu">
+    <a href="#descent" data-sec="descent"><small>LOG 02 · −8 M</small>The Descent</a>
+    <a href="#species" data-sec="species"><small>LOG 03 · −18 M</small>Species Index</a>
+    <a href="#notes" data-sec="notes"><small>LOG 04 · −26 M</small>Field Notes</a>
+    <a href="#soundings" data-sec="soundings"><small>LOG 05 · −29 M</small>Soundings</a>
+    <a href="#preorder" data-sec="preorder"><small>LOG 06 · −32 M</small>Pre-order</a>
+  </div>
+</header>
+
+<main id="main">
+<!-- ================= LOG 01 · HERO ================= -->
+<section id="top" data-depth="0" data-name="The Surface" aria-label="Driftwood — introduction">
+  <div class="surface-line" aria-hidden="true">
+    <svg class="wA" viewBox="0 0 1200 52" preserveAspectRatio="none"><path d="M0 26 Q75 14 150 26 T300 26 T450 26 T600 26 T750 26 T900 26 T1050 26 T1200 26" fill="none" stroke="#3FE0C5" stroke-width="1.4" opacity=".55"/></svg>
+    <svg class="wB" viewBox="0 0 1200 52" preserveAspectRatio="none"><path d="M0 34 Q100 22 200 34 T400 34 T600 34 T800 34 T1000 34 T1200 34" fill="none" stroke="#8FF2E2" stroke-width="1" opacity=".4"/></svg>
+  </div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy" id="hero-copy">
+      <p class="hero-eyebrow hero-anim">Desk reef № 01 · First tide March 2027</p>
+      <h1>
+        <span class="line l1"><span class="line-in">Fast music.</span></span>
+        <span class="line l2"><span class="line-in"><em>Slow stone.</em></span></span>
+      </h1>
+      <svg class="h1-wave" viewBox="0 0 300 14" aria-hidden="true"><path d="M2 8 Q20 2 38 8 T74 8 T110 8 T146 8 T182 8 T218 8 T254 8 T290 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <p class="hero-sub hero-anim">Driftwood is a palm-sized reef for your desk. It reads your <b>Spotify history</b> and grows real coral-mineral to match — a few millimetres a month, shaped and coloured by everything you play. The songs end. <b>The reef keeps them.</b></p>
+      <div class="hero-ctas hero-anim">
+        <a class="btn btn-primary" href="#preorder">Reserve yours — $149</a>
+        <a class="btn btn-ghost" href="#descent">See how it grows ↓</a>
+      </div>
+      <p class="hero-stats hero-anim"><span><b>2–4 mm</b> / month</span><span><b>5 W</b> USB-C</span><span><b>Sealed</b> salt cell</span></p>
+    </div>
+
+    <div class="hero-device">
+      <div id="stage">
+        <canvas id="reef" role="img" aria-label="A glass desk reef on a driftwood base. Procedural coral grows inside as fictional tracks play. Tap the glass to make the polyps flare.">A living canvas reef: coral branches in teal, amber, magenta, bone and pink grow inside a small glass tank as music plays.</canvas>
+        <span class="stage-tag">Live time-lapse · 1 s ≈ 1 day</span>
+      </div>
+
+      <div id="console" aria-label="Tide console — drive the demo reef">
+        <div class="con-head">
+          <span>Tide Console</span>
+          <span class="con-read">HEIGHT <b id="read-height">12.3 MM</b> · <b id="read-hours">34 H</b> LOGGED</span>
+        </div>
+        <div class="np">
+          <div id="np-art" aria-hidden="true"></div>
+          <div class="np-meta">
+            <p class="np-label">Now playing</p>
+            <p id="np-title">Nine Minutes of Fog</p>
+            <p id="np-artist">Slow Weather Committee</p>
+          </div>
+          <span id="np-genre">Ambient</span>
+        </div>
+        <div class="np-bar" aria-hidden="true"><i id="np-bar-fill"></i></div>
+        <div class="con-row" role="group" aria-label="Playback">
+          <button class="con-btn primary" id="play-btn" aria-pressed="true">
+            <svg id="play-ic" width="11" height="11" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="3.4" height="10" rx="1"/><rect x="7.6" y="1" width="3.4" height="10" rx="1"/></svg>
+            <span id="play-lbl">Pause</span>
+          </button>
+          <button class="con-btn" id="skip-btn" title="Skip — skipped songs leave a pale ring">
+            <svg width="12" height="11" viewBox="0 0 13 12" fill="currentColor" aria-hidden="true"><path d="M1 1l5 5-5 5V1z"/><path d="M6.5 1l5 5-5 5V1z"/><rect x="11.4" y="1" width="1.6" height="10" rx=".6"/></svg>
+            Skip
+          </button>
+          <span class="feed-label">Feed</span>
+          <button class="chip" data-g="auto" aria-pressed="true" style="--cc:#F2E9DA">Auto</button>
+          <button class="chip" data-g="0" aria-pressed="false" style="--cc:#3FE0C5">Ambient</button>
+          <button class="chip" data-g="1" aria-pressed="false" style="--cc:#FFC46B">Jazz</button>
+          <button class="chip" data-g="2" aria-pressed="false" style="--cc:#F26BB5">Electronic</button>
+          <button class="chip" data-g="3" aria-pressed="false" style="--cc:#F2E9DA">Classical</button>
+          <button class="chip" data-g="4" aria-pressed="false" style="--cc:#FF7A5C">Folk</button>
+        </div>
+        <div class="con-sliders">
+          <div class="slider-block">
+            <label for="tide-range">Tide speed <output id="tide-val">×1.0</output></label>
+            <input type="range" id="tide-range" min="0.5" max="4" step="0.5" value="1" style="--p:14%">
+          </div>
+          <div class="slider-block">
+            <label for="glow-range">Bioluminescence <output id="glow-val">70%</output></label>
+            <input type="range" id="glow-range" min="0" max="100" step="1" value="70" style="--p:70%">
+          </div>
+        </div>
+        <div class="con-row" style="margin-bottom:12px">
+          <button class="con-btn" id="reseed-btn" title="Cast a fresh seed — the reef starts over">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M12.5 7a5.5 5.5 0 1 1-1.6-3.9M12.5 1v3h-3"/></svg>
+            Reseed
+          </button>
+          <button class="con-btn" id="save-btn" title="Download the current reef as a PNG">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 1v8M3.5 6L7 9.5 10.5 6M1.5 12.5h11"/></svg>
+            <span id="save-lbl">Save reef</span>
+          </button>
+          <span class="con-hint"><button id="tap-hint">Tap the glass</button> — the polyps don't mind.</span>
+        </div>
+        <div class="con-foot">
+          <p id="deposit-line"><b>SEED CAST</b> · four months of you, already in the stone</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOG 02 · HOW ================= -->
+<section id="descent" data-depth="8" data-name="The Descent" aria-labelledby="descent-h">
+  <div class="wrap how-grid">
+    <div class="how-sticky">
+      <p class="eyebrow rv">Log 02 <span class="dep">· −8 m · The Descent</span></p>
+      <h2 id="descent-h" class="rv" style="--d:.08s">From play count<br>to <em class="acc-teal">polyp.</em></h2>
+      <p class="lead rv" style="--d:.16s">No ink, no filament, no resin tricks. Driftwood grows the way reefs do — mineral by mineral — just with better taste in music.</p>
+      <div class="core-wrap rv" style="--d:.24s" aria-hidden="true">
+        <svg id="core-svg" viewBox="0 0 74 210">
+          <rect x="14" y="6" width="46" height="198" rx="22" fill="none" stroke="#9DB6B2" stroke-opacity=".4" stroke-width="1.4"/>
+          <rect class="sed" id="core-l4" x="20" y="14" width="34" height="44" rx="16" fill="#F2E9DA"/>
+          <rect class="sed" id="core-l3" x="20" y="62" width="34" height="44" fill="#F26BB5"/>
+          <rect class="sed" id="core-l2" x="20" y="110" width="34" height="44" fill="#FFC46B"/>
+          <rect class="sed" id="core-l1" x="20" y="158" width="34" height="40" rx="16" fill="#3FE0C5"/>
+          <line x1="4" y1="58" x2="12" y2="58" stroke="#7E9793" stroke-width="1"/><line x1="4" y1="106" x2="12" y2="106" stroke="#7E9793" stroke-width="1"/><line x1="4" y1="154" x2="12" y2="154" stroke="#7E9793" stroke-width="1"/>
+        </svg>
+        <p class="core-meta">Sediment log<span id="step-num">01</span>Step <span id="step-of">01 / 04</span></p>
+      </div>
+    </div>
+    <div class="steps" id="steps">
+      <div id="steps-fill" aria-hidden="true"></div>
+      <article class="step rv" data-step="1">
+        <p class="step-no">Step 01 · Link</p>
+        <h3>Sign in, once.</h3>
+        <p>Link Spotify in the companion app. Driftwood reads your listening history — genres, hours, repeats, skips — <i>never your microphone</i>. Your shower singing stays between you and the tiles.</p>
+        <div class="step-diagram" aria-hidden="true"><svg viewBox="0 0 240 70" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 35v-6M18 35v-12M28 35v-20M38 35v-9M48 35v-16M58 35v-5M68 35v-13" opacity=".8"/><path d="M8 35v6M18 35v12M28 35v20M38 35v9M48 35v16M58 35v5M68 35v13" opacity=".4"/><path d="M84 35h56m0 0l-7-6m7 6l-7 6" stroke="#FFC46B"/><path d="M170 58V38M170 42c0-8-8-10-12-17M170 38c0-8 8-10 12-17" stroke="#FF7A5C" stroke-width="2.4"/><circle cx="158" cy="24" r="3" fill="#3FE0C5" stroke="none"/><circle cx="182" cy="20" r="3" fill="#FFC46B" stroke="none"/></svg></div>
+      </article>
+      <article class="step rv" data-step="2">
+        <p class="step-no">Step 02 · Seed</p>
+        <h3>Cast your seed.</h3>
+        <p>Drop a ceramic seed into the salt cell. Your first month of listening sets the base structure — the silhouette everything else will climb. Choose badly and you'll own a very honest monument to your podcast phase.</p>
+        <div class="step-diagram" aria-hidden="true"><svg viewBox="0 0 240 70" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M60 52q30 12 60 0" /><path d="M78 50l12-22 12 22" stroke="#F2E9DA" stroke-width="2.2" stroke-linejoin="round"/><path d="M40 30q10-6 20 0M120 30q10-6 20 0" opacity=".5"/><path d="M30 20q10-6 20 0M130 20q10-6 20 0" opacity=".25"/><circle cx="90" cy="14" r="2.4" fill="#3FE0C5" stroke="none"/></svg></div>
+      </article>
+      <article class="step rv" data-step="3">
+        <p class="step-no">Step 03 · Accrete</p>
+        <h3>The slow tide does the rest.</h3>
+        <p>A whisper of current — five volts, gentler than a doorbell — pulls calcium from the seawater and lays it down where your music points. Ambient spreads wide and patient. Techno stacks fast and neon. <i>Skips leave pale rings</i>, like drought years in a tree.</p>
+        <div class="step-diagram" aria-hidden="true"><svg viewBox="0 0 240 70" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="10" y="24" width="26" height="22" rx="4"/><path d="M36 30h4v10h-4M18 30v10M13 35h10" /><path d="M52 35h84" stroke-dasharray="2 7" stroke="#6BC7FF"/><path d="M150 56q22-8 44 0M154 48q18-7 36 0M158 40q14-6 28 0M163 32q9-5 18 0" stroke="#FFC46B" stroke-width="2"/></svg></div>
+      </article>
+      <article class="step rv" data-step="4">
+        <p class="step-no">Step 04 · Cohabit</p>
+        <h3>Live beside it.</h3>
+        <p>Top up the water monthly. Dust it occasionally. Otherwise, ignore it beautifully — it grows while you work, glows softly after dark, and never sends a push notification. The most interesting thing on your desk is now the one that says nothing.</p>
+        <div class="step-diagram" aria-hidden="true"><svg viewBox="0 0 240 70" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M30 58h180" opacity=".4"/><path d="M70 58V26h26" /><path d="M96 26l14 10-8 6" stroke="#FFC46B"/><path d="M104 44l30 14M104 44l-2 14" stroke="#FFC46B" opacity=".35"/><rect x="130" y="38" width="26" height="20" rx="4" stroke="#3FE0C5"/><path d="M143 54v-8m0 2c0-4-4-5-6-8m6 6c0-4 4-5 6-8" stroke="#FF7A5C" stroke-width="1.8"/><circle cx="196" cy="18" r="6" stroke="#F2E9DA" opacity=".7"/></svg></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOG 03 · SPECIES ================= -->
+<section id="species" data-depth="18" data-name="The Reef" aria-labelledby="species-h">
+  <div class="wrap">
+    <p class="eyebrow rv">Log 03 <span class="dep">· −18 m · The Reef</span></p>
+    <h2 id="species-h" class="rv" style="--d:.08s">The species <em class="acc-amber">index.</em></h2>
+    <p class="lead rv" style="--d:.16s">Your genres become genera. Five lineages so far; the reef is still taking notes. Open an entry for field data — or feed it straight to the demo reef above.</p>
+
+    <div class="ledger rv" style="--d:.2s" role="list">
+      <div class="ledger-head" aria-hidden="true"><span>№</span><span>Specimen</span><span>Genus</span><span>Feeds on</span><span>Rate</span><span>Hue</span><span></span></div>
+
+      <div class="sp" role="listitem" style="--gc:#3FE0C5">
+        <button class="sp-head" aria-expanded="false" aria-controls="sp-p0">
+          <span class="sp-no">01</span>
+          <svg class="sp-spec" viewBox="0 0 64 64" aria-hidden="true"><g class="sway" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M32 60V44M32 48C32 38 20 36 14 24M32 46C32 36 44 34 50 22M32 44C30 34 26 30 26 18M32 44C34 34 38 30 38 18M32 50C26 46 16 46 10 38M32 50C38 46 48 46 54 38"/><circle class="tip" cx="14" cy="23" r="2.4" fill="currentColor" stroke="none"/><circle class="tip" cx="50" cy="21" r="2.4" fill="currentColor" stroke="none" style="animation-delay:.6s"/><circle class="tip" cx="26" cy="17" r="2.2" fill="currentColor" stroke="none" style="animation-delay:1.1s"/><circle class="tip" cx="38" cy="17" r="2.2" fill="currentColor" stroke="none" style="animation-delay:1.7s"/></g></svg>
+          <span class="sp-name">The Long Listener<span class="sp-latin">Flabellum aeternum</span></span>
+          <span class="sp-feeds">Ambient · drone · rain apps</span>
+          <span class="sp-rate">2.1 mm/mo<span class="bar"><i style="--rw:50%"></i></span></span>
+          <span class="sp-hue"><i></i>Lagoon teal</span>
+          <svg class="sp-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
+        </button>
+        <div class="acc-panel" id="sp-p0"><div class="acc-inner"><div class="sp-notes">
+          <div class="data-chips"><span>Rate <b>2.1 mm/mo</b></span><span>Hue <b>Lagoon teal</b></span><span>Temperament <b>Unhurried</b></span></div>
+          <p>Grows widest during late-night sessions and thunderstorm playlists. Fans face the room's slowest current, which is usually you, breathing. <b>Blooms after any album played front-to-back more than three times.</b></p>
+          <button class="feed-reef" data-feed="0">Feed the reef ↑</button>
+        </div></div></div>
+      </div>
+
+      <div class="sp" role="listitem" style="--gc:#FFC46B">
+        <button class="sp-head" aria-expanded="false" aria-controls="sp-p1">
+          <span class="sp-no">02</span>
+          <svg class="sp-spec" viewBox="0 0 64 64" aria-hidden="true"><g class="sway" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M32 60V38M32 44C30 36 22 34 18 24M18 28C16 24 12 22 10 16M32 40C34 32 42 30 46 20M46 24C48 20 52 18 54 12M32 38V22"/><circle class="tip" cx="18" cy="23" r="2.6" fill="currentColor" stroke="none"/><circle class="tip" cx="10" cy="15" r="2.4" fill="currentColor" stroke="none" style="animation-delay:.5s"/><circle class="tip" cx="46" cy="19" r="2.6" fill="currentColor" stroke="none" style="animation-delay:1s"/><circle class="tip" cx="54" cy="11" r="2.4" fill="currentColor" stroke="none" style="animation-delay:1.4s"/><circle class="tip" cx="32" cy="21" r="2.6" fill="currentColor" stroke="none" style="animation-delay:2s"/></g></svg>
+          <span class="sp-name">The Standard<span class="sp-latin">Cervicornis swing</span></span>
+          <span class="sp-feeds">Jazz · soul · blue-note reissues</span>
+          <span class="sp-rate">3.4 mm/mo<span class="bar"><i style="--rw:81%"></i></span></span>
+          <span class="sp-hue"><i></i>Signal amber</span>
+          <svg class="sp-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
+        </button>
+        <div class="acc-panel" id="sp-p1"><div class="acc-inner"><div class="sp-notes">
+          <div class="data-chips"><span>Rate <b>3.4 mm/mo</b></span><span>Hue <b>Signal amber</b></span><span>Temperament <b>Improvisational</b></span></div>
+          <p>Branches on the off-beat. A twelve-minute solo will fork a limb nobody planned; repeated standards thicken the trunk like old rope. <b>If your library is mostly piano trios, expect antlers.</b></p>
+          <button class="feed-reef" data-feed="1">Feed the reef ↑</button>
+        </div></div></div>
+      </div>
+
+      <div class="sp" role="listitem" style="--gc:#F26BB5">
+        <button class="sp-head" aria-expanded="false" aria-controls="sp-p2">
+          <span class="sp-no">03</span>
+          <svg class="sp-spec" viewBox="0 0 64 64" aria-hidden="true"><g class="sway" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M24 60V16M36 60V24M46 60V34"/><ellipse cx="24" cy="46" rx="5" ry="2"/><ellipse cx="24" cy="34" rx="5" ry="2"/><ellipse cx="24" cy="22" rx="5" ry="2"/><ellipse cx="36" cy="48" rx="5" ry="2"/><ellipse cx="36" cy="36" rx="5" ry="2"/><ellipse cx="46" cy="48" rx="4.4" ry="1.8"/><circle class="tip" cx="24" cy="14" r="3" fill="currentColor" stroke="none"/><circle class="tip" cx="36" cy="22" r="3" fill="currentColor" stroke="none" style="animation-delay:.4s"/><circle class="tip" cx="46" cy="32" r="2.6" fill="currentColor" stroke="none" style="animation-delay:.9s"/></g></svg>
+          <span class="sp-name">The Night Shift<span class="sp-latin">Noctiluca modularis</span></span>
+          <span class="sp-feeds">Electronic · techno · synthwave</span>
+          <span class="sp-rate">4.2 mm/mo<span class="bar"><i style="--rw:100%"></i></span></span>
+          <span class="sp-hue"><i></i>Noctiluca magenta</span>
+          <svg class="sp-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
+        </button>
+        <div class="acc-panel" id="sp-p2"><div class="acc-inner"><div class="sp-notes">
+          <div class="data-chips"><span>Rate <b>4.2 mm/mo</b></span><span>Hue <b>Noctiluca magenta</b></span><span>Temperament <b>Relentless</b></span></div>
+          <p>Fastest lineage in the index. Stacks ringed stalks whose LED polyps sync to whatever BPM raised them — watch the demo pulse on the beat. <b>A skipped drop leaves a gap you can read like a barcode.</b></p>
+          <button class="feed-reef" data-feed="2">Feed the reef ↑</button>
+        </div></div></div>
+      </div>
+
+      <div class="sp" role="listitem" style="--gc:#F2E9DA">
+        <button class="sp-head" aria-expanded="false" aria-controls="sp-p3">
+          <span class="sp-no">04</span>
+          <svg class="sp-spec" viewBox="0 0 64 64" aria-hidden="true"><g class="sway" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M32 60V44C32 34 42 30 47 36C52 42 45 50 38 46C32 42 35 34 41 35C45 36 44 41 40 40"/><path d="M32 52l-7 3M32 47l-6-4" stroke-width="1.8" opacity=".7"/><circle class="tip" cx="40" cy="40" r="2.2" fill="currentColor" stroke="none"/></g></svg>
+          <span class="sp-name">The Patient<span class="sp-latin">Turris adagio</span></span>
+          <span class="sp-feeds">Classical · choral · film scores</span>
+          <span class="sp-rate">1.6 mm/mo<span class="bar"><i style="--rw:38%"></i></span></span>
+          <span class="sp-hue"><i></i>Bone white</span>
+          <svg class="sp-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
+        </button>
+        <div class="acc-panel" id="sp-p3"><div class="acc-inner"><div class="sp-notes">
+          <div class="data-chips"><span>Rate <b>1.6 mm/mo</b></span><span>Hue <b>Bone white</b></span><span>Temperament <b>Glacial</b></span></div>
+          <p>One coil, wound like a held breath. Slowest and densest mineral in the index. Fugues tighten the spiral; a full symphony adds a nacreous band <b>you'll only notice when the lamp catches it.</b></p>
+          <button class="feed-reef" data-feed="3">Feed the reef ↑</button>
+        </div></div></div>
+      </div>
+
+      <div class="sp" role="listitem" style="--gc:#FF7A5C">
+        <button class="sp-head" aria-expanded="false" aria-controls="sp-p4">
+          <span class="sp-no">05</span>
+          <svg class="sp-spec" viewBox="0 0 64 64" aria-hidden="true"><g class="sway" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M32 60V50M32 52l-8-6M32 52l8-8M24 46l-6-8M40 44l4-8"/><circle cx="24" cy="42" r="5.4" fill="currentColor" fill-opacity=".85" stroke="none"/><circle cx="40" cy="40" r="6.2" fill="currentColor" fill-opacity=".85" stroke="none"/><circle cx="17" cy="34" r="4.4" fill="currentColor" fill-opacity=".85" stroke="none"/><circle cx="45" cy="31" r="4.6" fill="currentColor" fill-opacity=".85" stroke="none"/><circle class="tip" cx="31" cy="31" r="5" fill="currentColor" stroke="none"/><circle cx="22" cy="24" r="3.6" fill="currentColor" fill-opacity=".85" stroke="none"/><circle class="tip" cx="38" cy="21" r="3.8" fill="currentColor" stroke="none" style="animation-delay:.8s"/></g></svg>
+          <span class="sp-name">The Homebody<span class="sp-latin">Globulus domesticus</span></span>
+          <span class="sp-feeds">Folk · indie · acoustic</span>
+          <span class="sp-rate">2.8 mm/mo<span class="bar"><i style="--rw:67%"></i></span></span>
+          <span class="sp-hue"><i></i>Living coral</span>
+          <svg class="sp-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
+        </button>
+        <div class="acc-panel" id="sp-p4"><div class="acc-inner"><div class="sp-notes">
+          <div class="data-chips"><span>Rate <b>2.8 mm/mo</b></span><span>Hue <b>Living coral</b></span><span>Temperament <b>Sentimental</b></span></div>
+          <p>Clusters of round chambers, one per song you keep coming back to. Harmonies add pearls. <b>Play it something with a banjo and it will forgive almost anything.</b></p>
+          <button class="feed-reef" data-feed="4">Feed the reef ↑</button>
+        </div></div></div>
+      </div>
+    </div>
+
+    <div class="specs">
+      <h3 class="rv">The hardware, <em class="acc-blue">honestly.</em></h3>
+      <p class="sub rv" style="--d:.06s">A spec sheet with nothing to hide behind.</p>
+      <div class="spec-grid">
+        <div class="spec-col hw rv" style="--d:.1s">
+          <h4>The Hardware</h4>
+          <div class="spec-row"><span class="k">Footprint</span><span class="dots"></span><span class="v">92 × 92 × 118 mm</span></div>
+          <div class="spec-row"><span class="k">Mass</span><span class="dots"></span><span class="v">640 g, watered</span></div>
+          <div class="spec-row"><span class="k">Power</span><span class="dots"></span><span class="v">USB-C, a polite 5 W</span></div>
+          <div class="spec-row"><span class="k">Cell</span><span class="dots"></span><span class="v">400 ml sealed saltwater</span></div>
+          <div class="spec-row"><span class="k">Base</span><span class="dots"></span><span class="v">Reclaimed driftwood, one of one</span></div>
+          <div class="spec-row"><span class="k">Light</span><span class="dots"></span><span class="v">12 polyp LEDs, dusk-timed</span></div>
+        </div>
+        <div class="spec-col sw rv" style="--d:.18s">
+          <h4>The Software</h4>
+          <div class="spec-row"><span class="k">Pairs with</span><span class="dots"></span><span class="v">iOS, Android, or nothing at all</span></div>
+          <div class="spec-row"><span class="k">Reads</span><span class="dots"></span><span class="v">History &amp; now-playing — never audio</span></div>
+          <div class="spec-row"><span class="k">Maps</span><span class="dots"></span><span class="v">5 lineages, 40+ subgenres</span></div>
+          <div class="spec-row"><span class="k">Offline</span><span class="dots"></span><span class="v">Grows from cached days</span></div>
+          <div class="spec-row"><span class="k">Export</span><span class="dots"></span><span class="v">Yearly timelapse &amp; ring report</span></div>
+          <div class="spec-row"><span class="k">Privacy</span><span class="dots"></span><span class="v">On-device; the cloud gets nothing</span></div>
+        </div>
+      </div>
+      <p class="spec-note rv" style="--d:.24s">Everything replaceable. Nothing disposable. The base is reclaimed driftwood; no two agree, and neither will yours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOG 04 · FIELD NOTES ================= -->
+<section id="notes" data-depth="26" data-name="Field Notes" aria-labelledby="notes-h">
+  <div class="wrap">
+    <p class="eyebrow rv">Log 04 <span class="dep">· −26 m · Field Notes</span></p>
+    <h2 id="notes-h" class="rv" style="--d:.08s">Postcards from <em class="acc-coral">other desks.</em></h2>
+    <p class="lead rv" style="--d:.16s">Early reefs, living with their people. We asked for honesty; the mineral encouraged it.</p>
+
+    <div class="cards">
+      <article class="postcard rv" style="--rot:-2.6deg;--pc:#E85D3D;--d:.1s">
+        <div class="pc-head">
+          <div class="pc-mark"><svg viewBox="0 0 64 34" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="17" cy="17" r="12"/><circle cx="17" cy="17" r="8.6" stroke-dasharray="2 2.6"/><path d="M32 10q6 3 12 0t12 0M32 17q6 3 12 0t12 0M32 24q6 3 12 0t12 0" opacity=".7"/></svg>Portland · 7 mo in</div>
+          <svg class="stamp" viewBox="0 0 52 60" aria-hidden="true"><rect x="3" y="3" width="46" height="54" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.4 3"/><path d="M26 48V32M26 36c0-7-7-8-10-14M26 33c0-7 7-8 10-14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="21" r="2.4" fill="currentColor"/><circle cx="36" cy="18" r="2.4" fill="currentColor"/><text x="26" y="56" text-anchor="middle" font-family="Menlo,Consolas,monospace" font-size="7" fill="currentColor">45¢</text></svg>
+        </div>
+        <blockquote>“The only notification I look forward to: ‘Your reef grew 2 mm this week. Mostly folk.’ I have started choosing albums the way you'd choose what to plant.”</blockquote>
+        <div class="pc-attr"><span>Mara T.</span><span class="grows">grows Globulus</span></div>
+      </article>
+      <article class="postcard rv" style="--rot:1.8deg;--pc:#C2418F;--d:.22s">
+        <div class="pc-head">
+          <div class="pc-mark"><svg viewBox="0 0 64 34" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="17" cy="17" r="12"/><circle cx="17" cy="17" r="8.6" stroke-dasharray="2 2.6"/><path d="M32 10q6 3 12 0t12 0M32 17q6 3 12 0t12 0M32 24q6 3 12 0t12 0" opacity=".7"/></svg>Berlin · 4 mo in</div>
+          <svg class="stamp" viewBox="0 0 52 60" aria-hidden="true"><rect x="3" y="3" width="46" height="54" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.4 3"/><path d="M20 48V22M32 48V28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="20" cy="34" rx="4.6" ry="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="32" cy="38" rx="4.6" ry="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="20" cy="20" r="2.6" fill="currentColor"/><circle cx="32" cy="26" r="2.6" fill="currentColor"/><text x="26" y="56" text-anchor="middle" font-family="Menlo,Consolas,monospace" font-size="7" fill="currentColor">45¢</text></svg>
+        </div>
+        <blockquote>“My techno habit is now a magenta tower my mother calls ‘the anxiety’. It is the most honest portrait of me in the apartment.”</blockquote>
+        <div class="pc-attr"><span>Dev O.</span><span class="grows">grows Noctiluca</span></div>
+      </article>
+      <article class="postcard rv" style="--rot:-1.2deg;--pc:#8A7354;--d:.34s">
+        <div class="pc-head">
+          <div class="pc-mark"><svg viewBox="0 0 64 34" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="17" cy="17" r="12"/><circle cx="17" cy="17" r="8.6" stroke-dasharray="2 2.6"/><path d="M32 10q6 3 12 0t12 0M32 17q6 3 12 0t12 0M32 24q6 3 12 0t12 0" opacity=".7"/></svg>Osaka · 9 mo in</div>
+          <svg class="stamp" viewBox="0 0 52 60" aria-hidden="true"><rect x="3" y="3" width="46" height="54" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.4 3"/><path d="M26 48V38c0-8 9-11 13-6c4 5-2 11-7 8c-4-3-2-9 3-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><text x="26" y="56" text-anchor="middle" font-family="Menlo,Consolas,monospace" font-size="7" fill="currentColor">45¢</text></svg>
+        </div>
+        <blockquote>“I played one album on repeat for a month to see what would happen. It grew a perfect spiral. The cat is jealous of a rock.”</blockquote>
+        <div class="pc-attr"><span>June &amp; Miso</span><span class="grows">grows Turris</span></div>
+      </article>
+    </div>
+
+    <div class="press rv" style="--d:.15s">
+      <div><b>Tidepool Weekly</b>“A Tamagotchi with taste and no guilt.”</div>
+      <div><b>The Slow Gadget</b>“The first device we've reviewed that improves when ignored.”</div>
+      <div><b>Coral Review of Books</b>“Melville would have ordered two.”</div>
+      <div><b>Deep End Quarterly</b>“Our desk plant is officially outclassed.”</div>
+    </div>
+
+    <div class="stats rv" style="--d:.2s">
+      <div class="stat"><b data-count="2318" data-dec="0" id="stat-reefs">0</b><span>Reefs reserved</span></div>
+      <div class="stat"><b data-count="41207" data-dec="0">0</b><span>Hours mineralised</span></div>
+      <div class="stat"><b data-count="3.2" data-dec="1">0</b><span>mm avg / month</span></div>
+      <div class="stat"><b data-count="0" data-dec="0">0</b><span>Polyps harmed</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOG 05 · SOUNDINGS ================= -->
+<section id="soundings" data-depth="29" data-name="Soundings" aria-labelledby="soundings-h">
+  <div class="wrap">
+    <p class="eyebrow rv">Log 05 <span class="dep">· −29 m · Soundings</span></p>
+    <h2 id="soundings-h" class="rv" style="--d:.08s">Soundings.</h2>
+    <p class="lead rv" style="--d:.16s">Fair questions, measured answers.</p>
+    <div class="faq rv" style="--d:.2s">
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq-a0">Is it… alive?<svg class="pm" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M11 3v16M3 11h16"/></svg></button></h3>
+        <div class="acc-panel" id="faq-a0"><div class="acc-inner"><p class="faq-a">Mineral-alive — the same way a pearl or a stalactite is: accretion, not metabolism. Nothing in there needs feeding, walking, or forgiveness. <i>It is coral the way a pearl is a pearl.</i></p></div></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq-a1">What if I stop listening?<svg class="pm" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M11 3v16M3 11h16"/></svg></button></h3>
+        <div class="acc-panel" id="faq-a1"><div class="acc-inner"><p class="faq-a">It rests. Growth pauses; nothing dies, nothing guilt-trips you. <i>Silence is a season.</i> When you come back, the reef picks up mid-thought.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq-a2">Do I need Spotify Premium?<svg class="pm" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M11 3v16M3 11h16"/></svg></button></h3>
+        <div class="acc-panel" id="faq-a2"><div class="acc-inner"><p class="faq-a">No. Any account with history works. Free-tier ad breaks are logged as ambient, <i>which felt right.</i></p></div></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq-a3">Will my desk smell like low tide?<svg class="pm" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M11 3v16M3 11h16"/></svg></button></h3>
+        <div class="acc-panel" id="faq-a3"><div class="acc-inner"><p class="faq-a">Sealed cell, carbon lid, freshwater top-ups. It smells like nothing — <i>which is the nicest thing a sea can do.</i></p></div></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq-a4">What do skips do?<svg class="pm" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M11 3v16M3 11h16"/></svg></button></h3>
+        <div class="acc-panel" id="faq-a4"><div class="acc-inner"><p class="faq-a">A skipped song leaves a thin pale ring, like a drought year in a tree. Try it on the demo reef above. <i>Your reef is honest.</i></p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOG 06 · PRE-ORDER ================= -->
+<section id="preorder" data-depth="32" data-name="The Seabed" aria-labelledby="preorder-h">
+  <div class="wrap cta-grid">
+    <div class="cta-copy">
+      <p class="eyebrow rv">Log 06 <span class="dep">· −32 m · The Seabed</span></p>
+      <h2 id="preorder-h" class="rv" style="--d:.08s">The tide is<br>taking <em class="acc-coral">names.</em></h2>
+      <p class="lead rv" style="--d:.16s">Reserve № 01 from the first casting. Ten dollars holds your place on the manifest; the rest is due only when your reef ships. Cancel any time before the water rises.</p>
+      <ul class="ticks rv" style="--d:.24s">
+        <li><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5l3.4 3.5L12 3.5"/></svg>Refundable until it ships</li>
+        <li><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5l3.4 3.5L12 3.5"/></svg>No subscription, ever</li>
+        <li><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5l3.4 3.5L12 3.5"/></svg>Your history stays on the device</li>
+      </ul>
+      <p class="tide-chip rv" style="--d:.3s">First tide · March 2027 · 500 units</p>
+    </div>
+
+    <div class="order-card rv" style="--d:.18s">
+      <div id="burst" aria-hidden="true"></div>
+      <div id="order-flow">
+        <div class="oc-head"><span>Reservation manifest</span><b>Next: № <span id="next-num">2,319</span></b></div>
+        <div class="price-row"><span class="price">$149</span><span class="price-sub">$10 today<br>balance at shipping</span></div>
+        <p class="oc-ships">Driftwood № 01 · ships March 2027</p>
+        <ul class="includes">
+          <li>Device &amp; glass cell, sealed</li>
+          <li>One-of-one driftwood base</li>
+          <li>Seed kit + 6 months of sea salt</li>
+          <li>The patient app, free forever</li>
+        </ul>
+        <form id="order-form" novalidate>
+          <div class="field">
+            <label for="email">Where the tide should write</label>
+            <input type="email" id="email" name="email" placeholder="you@somewhere.quiet" autocomplete="email" enterkeyhint="send" required aria-describedby="form-err">
+          </div>
+          <div class="field">
+            <label for="lineage">First lineage</label>
+            <select id="lineage" name="lineage">
+              <option value="surprise" selected>Surprise me — surprise is a genre</option>
+              <option value="0">The Long Listener · ambient</option>
+              <option value="1">The Standard · jazz</option>
+              <option value="2">The Night Shift · electronic</option>
+              <option value="3">The Patient · classical</option>
+              <option value="4">The Homebody · folk</option>
+            </select>
+          </div>
+          <label class="check"><input type="checkbox" id="letter" checked><span>Send me the monthly growth letter. One email, no undertow.</span></label>
+          <button type="submit" class="btn btn-primary" id="order-btn"><span class="spin" aria-hidden="true"></span><span class="lbl">Hold my place — $10</span></button>
+          <p id="form-err" role="alert" aria-live="assertive"></p>
+        </form>
+        <p class="oc-fine">60-day ebb-tide returns. If it doesn't grow on you, send it back.</p>
+      </div>
+      <div id="order-success" hidden>
+        <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="28" cy="28" r="25" stroke-dasharray="3 4"/><path d="M17 29l8 8 15-17"/></svg>
+        <h3 id="succ-h" tabindex="-1">You're on the manifest.</h3>
+        <p id="succ-meta">№ 2,319 · Turris adagio</p>
+        <p>We'll write when the water's ready. Until then, keep listening — you're building the base already.</p>
+        <button class="btn btn-ghost" id="again-btn" type="button">Reserve another reef</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= SEABED ================= -->
+<footer data-depth="34" data-name="Seabed">
+  <svg class="seabed-art" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 70 Q180 44 360 62 T720 58 T1080 66 T1440 52 V110 H0 Z" fill="#101F21"/>
+    <path d="M0 84 Q240 62 480 78 T960 80 T1440 72 V110 H0 Z" fill="#152528"/>
+    <g stroke="#C9B99B" stroke-opacity=".35" stroke-width="1.6" fill="none" stroke-linecap="round">
+      <path d="M180 84V70M180 74c0-6-6-7-8-12M180 72c0-6 6-7 8-12"/>
+      <path d="M1210 80V68M1210 72c0-5-5-6-7-10M1210 70c0-5 5-6 7-10"/>
+      <path d="M660 88c0-6 7-8 10-4c3 4-2 8-6 6c-3-2-2-6 2-5"/>
+      <path d="M420 90l4-7 4 7M424 83v-4"/>
+      <path d="M980 92l3-6 3 6"/>
+    </g>
+    <g fill="#C9B99B" fill-opacity=".3"><circle cx="172" cy="57" r="2"/><circle cx="188" cy="53" r="2"/><circle cx="1203" cy="57" r="1.8"/><circle cx="1217" cy="55" r="1.8"/><circle cx="540" cy="94" r="1.4"/><circle cx="860" cy="96" r="1.4"/><circle cx="300" cy="98" r="1.2"/></g>
+  </svg>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="word">Driftwood</span>
+        <p>Fast music. Slow stone.<br>An instrument for keeping what you loved.</p>
+      </div>
+      <nav class="foot-col" aria-label="Explore">
+        <h4>Explore</h4>
+        <a href="#descent">The descent</a>
+        <a href="#species">Species index</a>
+        <a href="#notes">Field notes</a>
+        <a href="#preorder">Pre-order</a>
+      </nav>
+      <nav class="foot-col" aria-label="Care and contact">
+        <h4>Care &amp; contact</h4>
+        <a href="#soundings">Care, honestly (FAQ)</a>
+        <button id="press-kit" type="button">Press kit (TXT) ↓</button>
+        <a href="mailto:hello@driftwood.example">hello@driftwood.example</a>
+      </nav>
+    </div>
+    <p class="seabed-note">— You've reached the seabed · −34 m —</p>
+    <p class="fine">Driftwood is a fictional instrument, dreamed up as a design study. No Spotify data was mineralised in the making of this page. Spotify® belongs to Spotify AB; this reef swims unaffiliated. All tracks in the demo are imaginary, though the fog is real.<br>© 2026 Driftwood Instruments · Made slowly, at 60 fps.</p>
+  </div>
+</footer>
+
+<div class="sr-only" role="status" id="sr-status"></div>
+<noscript><style>.rv,.hero-anim,.hero-device,h1 .line-in{opacity:1!important;transform:none!important}.h1-wave path{stroke-dashoffset:0!important}#console{display:none}</style></noscript>
+
+<script>
+(function(){
+'use strict';
+/* ================= helpers ================= */
+const $=(s,c)=>(c||document).querySelector(s);
+const $$=(s,c)=>Array.from((c||document).querySelectorAll(s));
+const clamp=(v,a,b)=>v<a?a:(v>b?b:v);
+const lerp=(a,b,t)=>a+(b-a)*t;
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const TAU=Math.PI*2;
+const easeOut=t=>1-Math.pow(1-t,3);
+const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
+const fmt=n=>Math.round(n).toLocaleString('en-US');
+let RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+function hexRGB(h){const n=parseInt(h.slice(1),16);return[(n>>16)&255,(n>>8)&255,n&255];}
+function mix(a,b,t){const A=hexRGB(a),B=hexRGB(b);return'rgb('+Math.round(lerp(A[0],B[0],t))+','+Math.round(lerp(A[1],B[1],t))+','+Math.round(lerp(A[2],B[2],t))+')';}
+function announce(msg){const el=$('#sr-status');if(el)el.textContent=msg;}
+function flashEl(el){if(!el||RM||!el.animate)return;try{el.animate([{opacity:.2,transform:'translateY(5px)'},{opacity:1,transform:'none'}],{duration:420,easing:'cubic-bezier(.16,1,.3,1)'});}catch(e){}}
+
+/* ================= genres & tracks ================= */
+const GENRES=[
+ {id:'ambient',label:'Ambient',species:'THE LONG LISTENER',latin:'Flabellum aeternum',color:'#3FE0C5',hi:'#8FF2E2',spread:.9,up:.3,len:[5.5,8.5],w:2.1,taper:.86,maxD:9,dur:6600,rootX:22},
+ {id:'jazz',label:'Jazz',species:'THE STANDARD',latin:'Cervicornis swing',color:'#FFC46B',hi:'#FFE0AE',spread:.55,up:.32,len:[7,11],w:3.0,taper:.8,maxD:8,dur:5200,rootX:50},
+ {id:'electronic',label:'Electronic',species:'THE NIGHT SHIFT',latin:'Noctiluca modularis',color:'#F26BB5',hi:'#FFA8D9',spread:.14,up:.78,len:[6.5,9.5],w:2.5,taper:.93,maxD:11,dur:4200,bpm:124,ring:true,rootX:66},
+ {id:'classical',label:'Classical',species:'THE PATIENT',latin:'Turris adagio',color:'#F2E9DA',hi:'#FFFFFF',curl:.5,len:[3.8,5.2],w:2.6,taper:.95,maxD:46,dur:6000,spiral:true,rootX:78},
+ {id:'folk',label:'Folk',species:'THE HOMEBODY',latin:'Globulus domesticus',color:'#FF7A5C',hi:'#FFB49E',spread:1.05,up:.18,len:[3,4.6],w:1.7,taper:.9,maxD:7,dur:5000,bubble:true,rootX:38}
+];
+GENRES.forEach(g=>{
+  g.cols=[g.color,mix(g.color,'#FFFFFF',.14),mix(g.color,'#041019',.14)];
+  const c=document.createElement('canvas');c.width=c.height=64;
+  const x=c.getContext('2d');
+  if(x){const gr=x.createRadialGradient(32,32,1,32,32,30);
+    const [r1,g1,b1]=hexRGB(g.hi),[r2,g2,b2]=hexRGB(g.color);
+    gr.addColorStop(0,'rgba('+r1+','+g1+','+b1+',.95)');
+    gr.addColorStop(.35,'rgba('+r2+','+g2+','+b2+',.4)');
+    gr.addColorStop(1,'rgba('+r2+','+g2+','+b2+',0)');
+    x.fillStyle=gr;x.fillRect(0,0,64,64);}
+  g.sprite=c;
+});
+const TRACKS=[
+ [['Nine Minutes of Fog','Slow Weather Committee'],['Held Breath, Room 4','Moss Cathedral'],['Glass Tide','Ana Linde'],['Terminal Light','Ana Linde']],
+ [['Minor Detour','The Long Now Quartet'],['Brushes on Rain','Otis Reyes Trio'],['Take the Scenic','Blue Hour Unit'],['Soft Machinery','Etta Marsh']],
+ [['Neon Plankton','Sodium Club'],['4AM Arpeggio','VOLT//VOLT'],['Dial Tone Sunset','Modem Dreams'],['Bloom Sequence','K. Iso']],
+ [['Nocturne for a Small Kitchen','Elena Voss'],['Adagio for Kettle & Strings','The Patient Orchestra'],['Prelude in C, Minor Mood','J. Alder'],['Spiral Study № 3','Elena Voss']],
+ [['Harbor Lights','Salt & Daughter'],['Paper Boats','The Orchard'],['Winter, Eventually','June Halvorsen'],['The Kitchen Waltz','Birch & Bramble']]
+];
+
+/* ================= state ================= */
+const MAX_NODES=760;
+const state={
+  userPlaying:!RM, feed:'auto', tide:1, glow:.7,
+  height:11.2, hours:34, elapsed:0, track:null, plan:[], addedThisTrack:0, lastAdded:-1,
+  flash:[0,0,0,0,0], current:0, matureNote:false,
+  soundOn:LS.get('dw_sound',true), reserved:LS.get('dw_count',0)
+};
+let nodes=[],colonies={},bubbles=[],ripples=[],autoBag=[];
+let px=0,py=0,tpx=0,tpy=0;
+let heroVisible=true,scrollDirty=true,vh=innerHeight,docH=1,sections=[],snowTint='rgba(157,182,178,1)';
+
+/* ================= coral model ================= */
+function ensureColony(gi){
+  if(colonies[gi])return colonies[gi];
+  const g=GENRES[gi];
+  const a=g.spiral?-1.35:rnd(-.15,.15);
+  const root={p:-1,a:a,wa:a,len:2,w:g.w,g:gi,t:1,ph:Math.random()*TAU,depth:0,h:2,x:0,kids:[],col:g.cols[0],pale:false};
+  const idx=nodes.length;nodes.push(root);
+  const c={x:g.rootX,nodes:[idx],main:idx,bound:Math.min(g.rootX-6,94-g.rootX),full:false};
+  colonies[gi]=c;return c;
+}
+function addSegment(gi,instant){
+  if(nodes.length>=MAX_NODES)return false;
+  const g=GENRES[gi],c=ensureColony(gi);
+  let tipIdx=-1;
+  if(g.spiral){
+    const mn=nodes[c.main];
+    if(mn&&mn.depth<g.maxD&&mn.t>.6)tipIdx=c.main;
+  }else{
+    const tips=c.nodes.filter(i=>{const n=nodes[i];return n.kids.length===0&&n.t>.6&&n.depth<g.maxD&&n.h<82&&Math.abs(n.x)<c.bound;});
+    if(tips.length)tipIdx=tips[(Math.random()*tips.length)|0];
+  }
+  if(tipIdx<0){c.full=true;return false;}
+  const p=nodes[tipIdx];
+  let a,isNub=false;
+  if(g.spiral){
+    isNub=p.depth>6&&Math.random()<.16;
+    a=isNub?(Math.random()<.5?1.35:-1.35):g.curl+rnd(-.04,.04);
+  }else{
+    a=-p.wa*g.up+rnd(-g.spread,g.spread);
+  }
+  const len=isNub?rnd(2,3.2):rnd(g.len[0],g.len[1]);
+  const w=Math.max(.7,p.w*(isNub?.5:g.taper));
+  const wa=p.wa+a;
+  const node={p:tipIdx,a:a,wa:wa,len:len,w:w,g:gi,t:instant?1:0,ph:Math.random()*TAU,depth:p.depth+1,
+    h:p.h+Math.cos(wa)*len,x:p.x+Math.sin(wa)*len,kids:[],col:g.cols[(Math.random()*3)|0],pale:false};
+  const idx=nodes.length;nodes.push(node);c.nodes.push(idx);p.kids.push(idx);
+  if(g.spiral&&!isNub)c.main=idx;
+  if(!instant){state.flash[gi]=1;state.addedThisTrack++;state.lastAdded=idx;}
+  return true;
+}
+function preGrow(counts){counts.forEach((n,gi)=>{for(let i=0;i<n;i++)addSegment(gi,true);});}
+
+/* ================= audio (all synthesised) ================= */
+const AudioKit={ctx:null,master:null,ready:false,lastNote:0,
+  init(){
+    if(this.ready||!state.soundOn)return;
+    try{
+      const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+      this.ctx=new AC();
+      this.master=this.ctx.createGain();this.master.gain.value=0;
+      this.master.connect(this.ctx.destination);
+      // ambience: distant water = filtered noise + two low sines
+      const nb=this.ctx.createBuffer(1,this.ctx.sampleRate*2,this.ctx.sampleRate);
+      const d=nb.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+      const noise=this.ctx.createBufferSource();noise.buffer=nb;noise.loop=true;
+      const nf=this.ctx.createBiquadFilter();nf.type='lowpass';nf.frequency.value=260;nf.Q.value=.6;
+      const ng=this.ctx.createGain();ng.gain.value=.05;
+      const lfo=this.ctx.createOscillator();lfo.frequency.value=.07;
+      const lg=this.ctx.createGain();lg.gain.value=90;
+      lfo.connect(lg);lg.connect(nf.frequency);lfo.start();
+      noise.connect(nf);nf.connect(ng);ng.connect(this.master);noise.start();
+      [[55,.045],[110.3,.028]].forEach(p=>{
+        const o=this.ctx.createOscillator();o.type='sine';o.frequency.value=p[0];
+        const f=this.ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=200;
+        const g=this.ctx.createGain();g.gain.value=p[1];
+        o.connect(f);f.connect(g);g.connect(this.master);o.start();
+      });
+      this.ready=true;
+      this.fade(state.soundOn?.14:0,1.6);
+      if(this.ctx.state==='suspended')this.ctx.resume().then(updateSoundBtn).catch(()=>{});
+      updateSoundBtn();
+    }catch(e){}
+  },
+  fade(v,t){if(!this.ready)return;try{const n=this.ctx.currentTime;this.master.gain.cancelScheduledValues(n);this.master.gain.setValueAtTime(this.master.gain.value,n);this.master.gain.linearRampToValueAtTime(v,n+t);}catch(e){}},
+  note(freq,type,rel,vol,delay){
+    if(!this.ready||!state.soundOn||this.ctx.state!=='running')return;
+    const d=delay||0;
+    if(d===0){const now=performance.now();if(now-this.lastNote<80)return;this.lastNote=now;}
+    try{
+      const t=this.ctx.currentTime+d;
+      const o=this.ctx.createOscillator();o.type=type;o.frequency.value=freq;
+      const f=this.ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=type==='sawtooth'?900:2600;
+      const g=this.ctx.createGain();
+      g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.02);
+      g.gain.exponentialRampToValueAtTime(.0001,t+rel);
+      o.connect(f);f.connect(g);
+      if(this.ctx.createStereoPanner){const p=this.ctx.createStereoPanner();p.pan.value=rnd(-.5,.5);g.connect(p);p.connect(this.master);}
+      else g.connect(this.master);
+      o.start(t);o.stop(t+rel+.1);
+    }catch(e){}
+  },
+  pluck(gi){
+    const scales=[[220,261.6,329.6,392,440],[293.7,349.2,392,440,523.3],[220,277.2,329.6,415.3,440],[261.6,329.6,392,523.3],[196,246.9,293.7,392,440]];
+    const types=['sine','triangle','sawtooth','sine','triangle'];
+    const rels=[2.6,.9,.35,2.2,1.1],vols=[.09,.08,.06,.08,.08];
+    const s=scales[gi];const f=s[(Math.random()*s.length)|0];
+    this.note(f,types[gi],rels[gi],vols[gi]);
+    if(gi===1)this.note(f*1.5,'triangle',.7,.05,.14);
+    if(gi===3)this.note(f*2,'sine',2,.04,.05);
+  },
+  ping(){this.note(rnd(780,980),'sine',1.2,.07);},
+  blip(){this.note(660,'sine',.16,.05);},
+  whoosh(){this.note(140,'sawtooth',.8,.06);this.note(98,'sine',1.2,.06,.08);},
+  chordUp(){[261.6,329.6,392,523.3].forEach((f,i)=>this.note(f,'sine',1.6,.08,i*.13));}
+};
+function updateSoundBtn(){
+  const b=$('#sound-btn');if(!b)return;
+  b.setAttribute('aria-pressed',String(state.soundOn));
+  b.setAttribute('aria-label',state.soundOn?'Sound on — mute the sea':'Sound off — unmute the sea');
+  b.classList.toggle('audible',state.soundOn&&AudioKit.ready&&AudioKit.ctx&&AudioKit.ctx.state==='running');
+}
+function firstGesture(){if(state.soundOn)AudioKit.init();}
+window.addEventListener('pointerdown',firstGesture,{once:true});
+window.addEventListener('keydown',firstGesture,{once:true});
+$('#sound-btn').addEventListener('click',()=>{
+  state.soundOn=!state.soundOn;LS.set('dw_sound',state.soundOn);
+  if(state.soundOn){AudioKit.init();if(AudioKit.ready){AudioKit.ctx.resume().catch(()=>{});AudioKit.fade(.14,.6);}}
+  else if(AudioKit.ready){AudioKit.fade(0,.25);}
+  updateSoundBtn();announce(state.soundOn?'Sound on':'Sound muted');
+});
+document.addEventListener('visibilitychange',()=>{
+  if(!AudioKit.ready)return;
+  try{if(document.hidden)AudioKit.ctx.suspend().catch(()=>{});else if(state.soundOn)AudioKit.ctx.resume().then(updateSoundBtn).catch(()=>{});}catch(e){}
+});
+
+/* ================= hero canvas ================= */
+const stage=$('#stage'),reef=$('#reef');
+const ctx=reef.getContext('2d');
+let cw=0,chh=0,dpr=1;
+function sizeReef(){
+  const r=stage.getBoundingClientRect();
+  dpr=Math.min(2,window.devicePixelRatio||1);
+  cw=Math.max(50,r.width);chh=Math.max(50,r.height);
+  reef.width=Math.round(cw*dpr);reef.height=Math.round(chh*dpr);
+}
+if(window.ResizeObserver){new ResizeObserver(()=>{sizeReef();scrollDirty=true;}).observe(stage);}
+else{window.addEventListener('resize',sizeReef);}
+sizeReef();
+
+function roundRectPath(c,x,y,w,h,r){
+  c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.arcTo(x+w,y,x+w,y+r,r);
+  c.lineTo(x+w,y+h-r);c.arcTo(x+w,y+h,x+w-r,y+h,r);c.lineTo(x+r,y+h);
+  c.arcTo(x,y+h,x,y+h-r,r);c.lineTo(x,y+r);c.arcTo(x,y,x+r,y,r);c.closePath();
+}
+const speckles=[];for(let i=0;i<14;i++)speckles.push([rnd(4,96),rnd(-7,-1),rnd(.4,1)]);
+
+function renderNode(i,now){
+  const n=nodes[i],g=GENRES[n.g];
+  const sway=RM?0:Math.sin(now*.0011+n.ph+n.depth*.4)*.016*(1+n.depth*.22)+state.current*.03*(n.depth/6);
+  ctx.save();
+  ctx.rotate(n.a+sway);
+  const t=easeOut(n.t),L=n.len*t;
+  ctx.strokeStyle=n.pale?'#EFE6D6':n.col;
+  ctx.lineWidth=Math.max(.5,n.w*(.5+.5*t));
+  ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-L);ctx.stroke();
+  if(g.ring&&t>.5){
+    ctx.strokeStyle=g.hi;ctx.globalAlpha=.7;ctx.lineWidth=.7;
+    ctx.beginPath();ctx.ellipse(0,-L*.6,n.w*1.7,n.w*.6,0,0,TAU);ctx.stroke();ctx.globalAlpha=1;
+  }
+  ctx.translate(0,-L);
+  if(g.bubble&&t>.5){
+    const r=n.w*2.1*t;
+    ctx.fillStyle=n.pale?'#EFE6D6':n.col;
+    ctx.beginPath();ctx.arc(0,0,r,0,TAU);ctx.fill();
+    ctx.strokeStyle=g.hi;ctx.globalAlpha=.5;ctx.lineWidth=.6;
+    ctx.beginPath();ctx.arc(-r*.3,-r*.3,r*.45,Math.PI*.9,Math.PI*1.6);ctx.stroke();ctx.globalAlpha=1;
+  }
+  if(n.kids.length===0){
+    const pulse=RM?.45:(.32+.26*Math.sin(now*.0024+n.ph));
+    const a=clamp(state.glow*pulse+state.flash[n.g]*.55,0,1);
+    if(a>.02){
+      const s=6.5+(RM?0:2.5*Math.sin(now*.002+n.ph))+state.flash[n.g]*4;
+      ctx.globalCompositeOperation='lighter';ctx.globalAlpha=a;
+      ctx.drawImage(g.sprite,-s/2,-s/2,s,s);
+      ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+    }
+  }else{for(let k=0;k<n.kids.length;k++)renderNode(n.kids[k],now);}
+  ctx.restore();
+}
+
+let bubbleTimer=0;
+function drawHero(now){
+  if(!ctx||cw<10)return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,cw,chh);
+  const s=Math.min(cw*.72/112,chh*.88/130);
+  const left=(cw-100*s)/2+px*10;
+  const top=(chh-128*s)/2+chh*.015+py*6;
+  const bottom=top+110*s;
+
+  // god rays
+  ctx.save();
+  ctx.globalCompositeOperation='lighter';
+  ctx.translate(cw*.32+px*30,-30);
+  ctx.rotate(.26+(RM?0:Math.sin(now*.00007)*.035)+px*.05);
+  for(let i=0;i<3;i++){
+    const w=34+i*26,len=chh*1.25;
+    const gr=ctx.createLinearGradient(0,0,0,len);
+    gr.addColorStop(0,'rgba(143,242,226,'+(0.085-i*.02)+')');gr.addColorStop(1,'rgba(143,242,226,0)');
+    ctx.fillStyle=gr;
+    ctx.beginPath();ctx.moveTo(i*54-8,0);ctx.lineTo(i*54+w,0);ctx.lineTo(i*54+w+70,len);ctx.lineTo(i*54-70,len);ctx.closePath();ctx.fill();
+  }
+  ctx.restore();
+
+  ctx.save();
+  ctx.translate(left,bottom);ctx.scale(s,s);
+  ctx.lineCap='round';ctx.lineJoin='round';
+
+  // desk shadow
+  const sh=ctx.createRadialGradient(50,17,4,50,17,62);
+  sh.addColorStop(0,'rgba(2,7,13,.5)');sh.addColorStop(1,'rgba(2,7,13,0)');
+  ctx.fillStyle=sh;ctx.beginPath();ctx.ellipse(50,17,62,7,0,0,TAU);ctx.fill();
+
+  // driftwood base
+  ctx.fillStyle='#5E4230';
+  ctx.beginPath();ctx.moveTo(-8,2);ctx.bezierCurveTo(10,-2,32,4,52,1);ctx.bezierCurveTo(74,-2,94,3,108,2);
+  ctx.lineTo(108,10);ctx.bezierCurveTo(80,15,20,15,-8,10);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#4A3325';
+  ctx.beginPath();ctx.moveTo(-8,7);ctx.bezierCurveTo(30,11,70,11,108,7);ctx.lineTo(108,10);ctx.bezierCurveTo(80,15,20,15,-8,10);ctx.closePath();ctx.fill();
+  ctx.strokeStyle='rgba(30,18,10,.5)';ctx.lineWidth=.7;
+  for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(-4,3.4+i*2);ctx.bezierCurveTo(30,2.4+i*2+(i%2),70,4.4+i*2,104,3+i*2);ctx.stroke();}
+  ctx.strokeStyle='rgba(242,233,218,.12)';ctx.lineWidth=.8;
+  ctx.beginPath();ctx.moveTo(-6,2.4);ctx.bezierCurveTo(24,-.6,60,3.4,106,2.2);ctx.stroke();
+  ctx.fillStyle='#6B4A32';
+  ctx.beginPath();ctx.moveTo(-8,4);ctx.quadraticCurveTo(-16,0,-14,-6);ctx.quadraticCurveTo(-10,-2,-4,1);ctx.closePath();ctx.fill();
+
+  // tank interior (clipped)
+  ctx.save();
+  roundRectPath(ctx,0,-110,100,110,7);ctx.clip();
+  const wg=ctx.createLinearGradient(0,-100,0,0);
+  wg.addColorStop(0,'rgba(31,105,112,.4)');wg.addColorStop(.6,'rgba(14,62,70,.5)');wg.addColorStop(1,'rgba(8,34,46,.68)');
+  ctx.fillStyle=wg;ctx.fillRect(0,-100,100,100);
+  const lp=ctx.createRadialGradient(50,-6,2,50,-6,46);
+  lp.addColorStop(0,'rgba(143,242,226,.1)');lp.addColorStop(1,'rgba(143,242,226,0)');
+  ctx.fillStyle=lp;ctx.fillRect(0,-30,100,30);
+  ctx.strokeStyle='rgba(143,242,226,.07)';ctx.lineWidth=2.2;
+  for(let i=0;i<3;i++){
+    ctx.beginPath();
+    for(let x=6;x<=94;x+=6){
+      const y=-7-i*3+Math.sin(x*.22+(RM?0:now*.0005)+i*2)*1.6;
+      x===6?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+  const sg=ctx.createLinearGradient(0,-11,0,0);
+  sg.addColorStop(0,'#8A7354');sg.addColorStop(1,'#57452F');
+  ctx.fillStyle=sg;
+  ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-5);ctx.quadraticCurveTo(24,-10,50,-8);ctx.quadraticCurveTo(76,-11,100,-5);ctx.lineTo(100,0);ctx.closePath();ctx.fill();
+  ctx.fillStyle='rgba(242,233,218,.18)';
+  speckles.forEach(p=>{ctx.beginPath();ctx.arc(p[0],p[1],p[2]*.6,0,TAU);ctx.fill();});
+  ctx.fillStyle='#31494E';
+  Object.keys(colonies).forEach(k=>{const c=colonies[k];ctx.beginPath();ctx.ellipse(c.x,-3,4.4,2.6,0,0,TAU);ctx.fill();});
+  // coral
+  Object.keys(colonies).forEach(k=>{
+    const c=colonies[k];
+    ctx.save();ctx.translate(c.x,-4);renderNode(c.nodes[0],now);ctx.restore();
+  });
+  // bubbles
+  ctx.strokeStyle='rgba(242,233,218,.5)';ctx.lineWidth=.6;
+  bubbles.forEach(b=>{ctx.globalAlpha=b.a;ctx.beginPath();ctx.arc(b.x+Math.sin(now*.003+b.ph)*1.4,-b.y,b.r,0,TAU);ctx.stroke();});
+  ctx.globalAlpha=1;
+  // ripples
+  ripples.forEach(r=>{ctx.strokeStyle='rgba(143,242,226,'+r.a.toFixed(3)+')';ctx.lineWidth=.9;ctx.beginPath();ctx.arc(r.x,-r.y,r.r,0,TAU);ctx.stroke();});
+  // water surface
+  ctx.strokeStyle='rgba(242,233,218,.4)';ctx.lineWidth=.9;
+  ctx.beginPath();
+  for(let x=0;x<=100;x+=4){const y=-100+(RM?0:Math.sin(x*.35+now*.0025)*1.1);x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+  ctx.stroke();
+  ctx.strokeStyle='rgba(143,242,226,.16)';
+  ctx.beginPath();
+  for(let x=0;x<=100;x+=4){const y=-98.6+(RM?0:Math.sin(x*.3+now*.002+2)*1);x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+  ctx.stroke();
+  ctx.restore(); // unclip
+
+  // glass
+  ctx.strokeStyle='rgba(242,233,218,.3)';ctx.lineWidth=1.1;
+  roundRectPath(ctx,0,-110,100,110,7);ctx.stroke();
+  ctx.strokeStyle='rgba(63,224,197,.14)';ctx.lineWidth=2.4;
+  roundRectPath(ctx,1.6,-108.4,96.8,106.8,6);ctx.stroke();
+  const hl=ctx.createLinearGradient(5,0,13,0);
+  hl.addColorStop(0,'rgba(242,233,218,.12)');hl.addColorStop(1,'rgba(242,233,218,0)');
+  ctx.fillStyle=hl;ctx.fillRect(5,-104,8,98);
+  // lid + status LED
+  ctx.fillStyle='#0B2530';roundRectPath(ctx,-2,-114.5,104,5,2);ctx.fill();
+  ctx.strokeStyle='rgba(242,233,218,.18)';ctx.lineWidth=.7;roundRectPath(ctx,-2,-114.5,104,5,2);ctx.stroke();
+  ctx.fillStyle='rgba(255,122,92,'+(RM?.75:(0.5+.5*Math.sin(now*.002)))+')';
+  ctx.beginPath();ctx.arc(96,-112,1.1,0,TAU);ctx.fill();
+  ctx.restore();
+}
+
+function updateHeroWorld(dt,now){
+  for(let i=0;i<5;i++)state.flash[i]=Math.max(0,state.flash[i]-dt*.002);
+  px+=(tpx-px)*.05;py+=(tpy-py)*.05;state.current=px;
+  for(let i=0;i<nodes.length;i++){const n=nodes[i];if(n.t<1)n.t=RM?1:Math.min(1,n.t+dt/650);}
+  bubbleTimer+=dt;
+  if(bubbleTimer>620&&bubbles.length<20&&!RM){bubbleTimer=0;bubbles.push({x:rnd(84,92),y:4,v:rnd(.014,.026),ph:Math.random()*TAU,r:rnd(.7,1.7),a:rnd(.3,.6)});}
+  for(let i=bubbles.length-1;i>=0;i--){const b=bubbles[i];b.y+=b.v*dt;if(b.y>=97){ripples.push({x:b.x,y:98.5,r:1,a:.25});bubbles.splice(i,1);}}
+  for(let i=ripples.length-1;i>=0;i--){const r=ripples[i];r.r+=dt*.028;r.a*=Math.pow(.93,dt/16);if(r.a<.02)ripples.splice(i,1);}
+}
+function tapGlass(wx,wy){
+  wx=clamp(wx,8,92);wy=clamp(wy,8,94);
+  ripples.push({x:wx,y:wy,r:2,a:.55});
+  for(let i=0;i<3;i++)bubbles.push({x:wx+rnd(-3,3),y:wy,v:rnd(.02,.035),ph:Math.random()*TAU,r:rnd(.6,1.4),a:.5});
+  for(let i=0;i<5;i++)state.flash[i]=Math.max(state.flash[i],.7);
+  AudioKit.ping();
+  logLine('<b>THE POLYPS NOTICED YOU</b> · a brief, flattered glow',false);
+}
+reef.addEventListener('pointermove',e=>{
+  const r=reef.getBoundingClientRect();
+  tpx=(e.clientX-r.left)/r.width-.5;tpy=(e.clientY-r.top)/r.height-.5;
+});
+reef.addEventListener('pointerleave',()=>{tpx=0;tpy=0;});
+reef.addEventListener('click',e=>{
+  const r=reef.getBoundingClientRect();
+  const s=Math.min(r.width*.72/112,r.height*.88/130);
+  const left=(r.width-100*s)/2+px*10;
+  const top=(r.height-128*s)/2+r.height*.015+py*6;
+  const wx=(e.clientX-r.left-left)/s,wy=(top+110*s-(e.clientY-r.top))/s;
+  if(wx>-4&&wx<104&&wy>0&&wy<112)tapGlass(wx,wy);
+});
+$('#tap-hint').addEventListener('click',()=>tapGlass(rnd(20,80),rnd(30,80)));
+
+/* ================= demo / tracks ================= */
+const npTitle=$('#np-title'),npArtist=$('#np-artist'),npGenre=$('#np-genre'),npArt=$('#np-art'),npFill=$('#np-bar-fill');
+const readH=$('#read-height'),readHours=$('#read-hours'),depositEl=$('#deposit-line');
+function logLine(html,warn){
+  depositEl.innerHTML=html;depositEl.classList.toggle('warn',!!warn);flashEl(depositEl);
+}
+function artSVG(g){
+  const c=g.color,h=g.hi;
+  return '<svg viewBox="0 0 46 46" width="46" height="46"><rect width="46" height="46" fill="#041019"/>'+
+  '<circle cx="23" cy="23" r="16" fill="none" stroke="'+c+'" stroke-opacity=".35" stroke-width="1.4"/>'+
+  '<circle cx="23" cy="23" r="11" fill="none" stroke="'+c+'" stroke-opacity=".6" stroke-width="1.4" stroke-dasharray="10 6"/>'+
+  '<circle cx="23" cy="23" r="6.5" fill="none" stroke="'+h+'" stroke-width="1.6" stroke-dasharray="5 4"/>'+
+  '<circle cx="23" cy="23" r="2.4" fill="'+c+'"/></svg>';
+}
+function pickGenre(){
+  if(state.feed!=='auto')return parseInt(state.feed,10);
+  if(autoBag.length===0){autoBag=[0,0,1,1,2,2,3,4,4];for(let i=autoBag.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;const t=autoBag[i];autoBag[i]=autoBag[j];autoBag[j]=t;}}
+  return autoBag.pop();
+}
+let lastTrackIdx=[-1,-1,-1,-1,-1];
+function nextTrack(){
+  const gi=pickGenre(),g=GENRES[gi],pool=TRACKS[gi];
+  let ti=(Math.random()*pool.length)|0;
+  if(pool.length>1&&ti===lastTrackIdx[gi])ti=(ti+1)%pool.length;
+  lastTrackIdx[gi]=ti;
+  const t={g:gi,title:pool[ti][0],artist:pool[ti][1],dur:g.dur,hrs:rnd(2,4.6)};
+  state.track=t;state.elapsed=0;state.addedThisTrack=0;
+  const count=6+((Math.random()*7)|0);
+  state.plan=[];
+  if(g.bpm){const beat=60000/g.bpm;const beats=Math.floor(t.dur/beat);
+    for(let i=1;i<=beats;i++)state.plan.push({at:(i*beat)/t.dur,done:false});
+  }else{for(let i=0;i<count;i++)state.plan.push({at:.12+.8*(i/(count-1||1)),done:false});}
+  npTitle.textContent=t.title;npArtist.textContent=t.artist;
+  npGenre.textContent=g.label;npGenre.style.background=g.color;
+  npFill.style.background=g.color;npFill.style.transform='scaleX(0)';
+  npArt.innerHTML=artSVG(g);
+  flashEl(npTitle);
+}
+function updateReadouts(){
+  readH.textContent=state.height.toFixed(1)+' MM';
+  readHours.textContent=Math.round(state.hours)+' H';
+}
+function completeTrack(skipped){
+  const t=state.track,frac=clamp(state.elapsed/t.dur,0,1);
+  const mm=state.addedThisTrack*.014;
+  state.height+=mm;state.hours+=t.hrs*(skipped?frac:1);
+  const g=GENRES[t.g];
+  if(skipped&&state.addedThisTrack>0&&state.lastAdded>=0&&nodes[state.lastAdded]){
+    nodes[state.lastAdded].pale=true;
+    logLine('<b>PALE RING</b> · “'+t.title+'” skipped at '+Math.round(frac*100)+'% — the reef remembers',false);
+  }else if(nodes.length>=MAX_NODES){
+    if(!state.matureNote){state.matureNote=true;announce('Reef mature — reseed to start another');}
+    logLine('<b>REEF MATURE</b> · a full century of you. Reseed to start another.',true);
+    $('#reseed-btn').classList.add('attn');
+  }else if(mm<=0){
+    logLine('<b>'+g.species+' HAS REACHED THE LIGHT</b> · try another lineage',true);
+  }else{
+    logLine('<b>+'+mm.toFixed(2)+' MM</b> · “'+t.title+'” → '+g.species,false);
+  }
+  AudioKit.pluck(t.g);
+  updateReadouts();flashEl(readH);
+  nextTrack();
+}
+function updateDemo(dt){
+  if(!(state.userPlaying&&heroVisible)||!state.track)return;
+  state.elapsed+=dt*state.tide;
+  const t=state.track,frac=state.elapsed/t.dur;
+  for(let i=0;i<state.plan.length;i++){
+    const pl=state.plan[i];
+    if(!pl.done&&frac>=pl.at){pl.done=true;addSegment(t.g,false);}
+  }
+  npFill.style.transform='scaleX('+Math.min(1,frac).toFixed(4)+')';
+  if(frac>=1)completeTrack(false);
+}
+const playBtn=$('#play-btn'),playLbl=$('#play-lbl'),playIc=$('#play-ic');
+function syncPlayBtn(){
+  playBtn.setAttribute('aria-pressed',String(state.userPlaying));
+  playLbl.textContent=state.userPlaying?'Pause':'Listen';
+  playIc.innerHTML=state.userPlaying
+    ?'<rect x="1" y="1" width="3.4" height="10" rx="1"/><rect x="7.6" y="1" width="3.4" height="10" rx="1"/>'
+    :'<path d="M2 1l9 5-9 5V1z"/>';
+}
+playBtn.addEventListener('click',()=>{
+  state.userPlaying=!state.userPlaying;syncPlayBtn();AudioKit.blip();
+  announce(state.userPlaying?'Demo reef listening':'Demo reef paused');
+  logLine(state.userPlaying?'<b>LISTENING RESUMED</b> · the tide picks up mid-thought':'<b>THE REEF RESTS</b> · silence is a season',false);
+});
+$('#skip-btn').addEventListener('click',()=>{
+  AudioKit.blip();
+  if(state.elapsed>500)completeTrack(true);else nextTrack();
+});
+function setFeed(id,silent){
+  state.feed=id;
+  $$('.chip[data-g]').forEach(ch=>ch.setAttribute('aria-pressed',String(ch.dataset.g===id)));
+  if(!silent){
+    AudioKit.blip();
+    const label=id==='auto'?'a mixed diet':GENRES[parseInt(id,10)].label.toLowerCase();
+    logLine('<b>DIET CHANGED</b> · the reef will grow on '+label,false);
+  }
+}
+$$('.chip[data-g]').forEach(ch=>ch.addEventListener('click',()=>setFeed(ch.dataset.g,false)));
+const tideRange=$('#tide-range'),glowRange=$('#glow-range');
+function paintRange(el){const p=(el.value-el.min)/(el.max-el.min)*100;el.style.setProperty('--p',p+'%');}
+tideRange.addEventListener('input',()=>{
+  state.tide=parseFloat(tideRange.value);
+  $('#tide-val').textContent='×'+state.tide.toFixed(1);paintRange(tideRange);
+});
+glowRange.addEventListener('input',()=>{
+  state.glow=parseInt(glowRange.value,10)/100;
+  $('#glow-val').textContent=glowRange.value+'%';paintRange(glowRange);
+});
+$('#reseed-btn').addEventListener('click',()=>{
+  nodes=[];colonies={};bubbles=[];ripples=[];
+  state.height=0;state.hours=0;state.matureNote=false;state.lastAdded=-1;
+  preGrow([2,2,0,0,2]);
+  state.height=nodes.length*.014;
+  state.plan.forEach(p=>{p.done=false;});state.addedThisTrack=0;
+  $('#reseed-btn').classList.remove('attn');
+  AudioKit.whoosh();updateReadouts();
+  logLine('<b>NEW SEED CAST</b> · the reef forgets, politely',false);
+  announce('Reef reseeded');
+});
+$('#save-btn').addEventListener('click',()=>{
+  try{
+    const bar=Math.round(56*dpr);
+    const out=document.createElement('canvas');
+    out.width=reef.width;out.height=reef.height+bar;
+    const o=out.getContext('2d');
+    o.fillStyle='#061821';o.fillRect(0,0,out.width,out.height);
+    o.drawImage(reef,0,0);
+    let dom=0,best=-1;
+    Object.keys(colonies).forEach(k=>{if(colonies[k].nodes.length>best){best=colonies[k].nodes.length;dom=parseInt(k,10);}});
+    o.fillStyle='#F2E9DA';o.font=(11*dpr)+'px Menlo, Consolas, monospace';
+    o.fillText('DRIFTWOOD · '+state.height.toFixed(1)+' MM · '+Math.round(state.hours)+' H · MOSTLY '+GENRES[dom].label.toUpperCase(),14*dpr,out.height-32*dpr);
+    o.fillStyle='#3FE0C5';
+    o.fillText('FAST MUSIC. SLOW STONE.',14*dpr,out.height-14*dpr);
+    const a=document.createElement('a');
+    a.download='driftwood-reef-'+state.height.toFixed(1)+'mm.png';
+    a.href=out.toDataURL('image/png');a.click();
+    const lbl=$('#save-lbl');lbl.textContent='Saved ✓';
+    setTimeout(()=>{lbl.textContent='Save reef';},1600);
+    AudioKit.blip();announce('Reef image downloaded');
+  }catch(e){logLine('<b>EXPORT EBBED</b> · your browser held the tide back',true);}
+});
+$$('.feed-reef').forEach(b=>b.addEventListener('click',()=>{
+  setFeed(b.dataset.feed,false);
+  if(!state.userPlaying){state.userPlaying=true;syncPlayBtn();}
+  document.getElementById('top').scrollIntoView({behavior:RM?'auto':'smooth'});
+  announce('Feeding the demo reef '+GENRES[parseInt(b.dataset.feed,10)].label);
+}));
+
+/* ================= snow (marine particles) ================= */
+const snow=$('#snow'),sctx=snow.getContext('2d');
+let sw=0,sh=0,sdpr=1,motes=[];
+function sizeSnow(){
+  sdpr=Math.min(1.5,window.devicePixelRatio||1);
+  sw=innerWidth;sh=innerHeight;
+  snow.width=Math.round(sw*sdpr);snow.height=Math.round(sh*sdpr);
+  if(motes.length===0)for(let i=0;i<64;i++)motes.push({x:Math.random()*sw,y:Math.random()*sh,r:rnd(.5,2.1),v:rnd(.004,.016),ph:Math.random()*TAU,a:rnd(.05,.2),big:i<5});
+  motes.forEach(m=>{if(m.x>sw)m.x=Math.random()*sw;if(m.y>sh)m.y=Math.random()*sh;});
+  if(RM)drawSnow(0,0);
+}
+function drawSnow(now,dt){
+  if(!sctx)return;
+  sctx.setTransform(sdpr,0,0,sdpr,0,0);
+  sctx.clearRect(0,0,sw,sh);
+  sctx.fillStyle=snowTint;
+  for(let i=0;i<motes.length;i++){
+    const m=motes[i];
+    if(!RM){m.y-=m.v*dt;if(m.y<-6){m.y=sh+6;m.x=Math.random()*sw;}}
+    const x=m.x+(RM?0:Math.sin(now*.0004+m.ph)*14);
+    sctx.globalAlpha=m.big?.05:m.a;
+    sctx.beginPath();sctx.arc(x,m.y,m.big?m.r*7:m.r,0,TAU);sctx.fill();
+  }
+  sctx.globalAlpha=1;
+}
+sizeSnow();
+
+/* ================= scroll system ================= */
+const nav=$('#site-nav'),depthChip=$('#depth-chip'),railFill=$('#rail-fill'),railDot=$('#rail-dot'),railLabel=$('#rail-label');
+const bgL=[$('#bg-l1'),$('#bg-l2'),$('#bg-l3')];
+const heroCopy=$('#hero-copy');
+const stepsFill=$('#steps-fill'),stepNum=$('#step-num'),stepOf=$('#step-of');
+const coreLayers=[$('#core-l1'),$('#core-l2'),$('#core-l3'),$('#core-l4')];
+const stepsEls=$$('.step'),stepsBox=$('#steps');
+const navLinks=$$('.nav-links a,#mobile-menu a');
+let lastSec='';
+function measure(){
+  vh=innerHeight;docH=Math.max(1,document.documentElement.scrollHeight-vh);
+  sections=$$('[data-depth]').map(el=>({el:el,top:el.getBoundingClientRect().top+scrollY,depth:parseFloat(el.dataset.depth),name:el.dataset.name,id:el.id}));
+  scrollDirty=true;
+}
+function applyScroll(){
+  const y=scrollY,center=y+vh*.5;
+  // reads first
+  let stepP=0,active=0,stepRects=null;
+  if(stepsBox){
+    const r=stepsBox.getBoundingClientRect();
+    stepP=clamp((vh*.55-r.top)/Math.max(1,r.height),0,1);
+    stepRects=stepsEls.map(el=>el.getBoundingClientRect().top);
+    stepRects.forEach((t,i)=>{if(t<vh*.62)active=i+1;});
+    active=Math.max(1,active);
+  }
+  // writes
+  nav.classList.toggle('scrolled',y>36);
+  let depth=0,name='The Surface',secId='top';
+  for(let i=0;i<sections.length;i++){
+    const a=sections[i],b=sections[i+1];
+    if(!b||center<b.top){
+      if(center>=a.top&&b){const t=smooth((center-a.top)/(b.top-a.top));depth=lerp(a.depth,b.depth,t);}
+      else depth=a.depth;
+      name=a.name;secId=a.id;break;
+    }
+  }
+  depthChip.textContent='−'+depth.toFixed(1)+' m';
+  const q=clamp(y/docH,0,1);
+  railFill.style.transform='scaleY('+q.toFixed(4)+')';
+  railDot.style.top=(q*100).toFixed(2)+'%';
+  if(name!==lastSec){railLabel.textContent=name;lastSec=name;}
+  navLinks.forEach(a=>{
+    if(a.dataset.sec===secId)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');
+  });
+  const sp=sections.find(s=>s.id==='species'),no=sections.find(s=>s.id==='notes'),pre=sections.find(s=>s.id==='preorder');
+  if(sp&&no&&pre){
+    bgL[0].style.opacity=smooth((center-sp.top+vh*.4)/(vh*.9)).toFixed(3);
+    bgL[1].style.opacity=smooth((center-no.top+vh*.4)/(vh*.9)).toFixed(3);
+    bgL[2].style.opacity=smooth((center-pre.top+vh*.4)/(vh*.9)).toFixed(3);
+  }
+  const dq=clamp(depth/34,0,1);
+  snowTint=dq<.6?mix('#9DB6B2','#F2E9DA',dq/.6):mix('#F2E9DA','#C9B99B',(dq-.6)/.4);
+  if(!RM&&y<vh*1.2)heroCopy.style.transform='translateY('+(y*.1).toFixed(1)+'px)';
+  if(stepsBox){
+    stepsFill.style.transform='scaleY('+stepP.toFixed(4)+')';
+    stepsEls.forEach((el,i)=>el.classList.toggle('active',stepRects[i]<vh*.62));
+    stepNum.textContent='0'+active;
+    stepOf.textContent='0'+active+' / 04';
+    coreLayers.forEach((l,i)=>l.classList.toggle('filled',i<active));
+  }
+}
+window.addEventListener('scroll',()=>{scrollDirty=true;},{passive:true});
+let resizeT;
+window.addEventListener('resize',()=>{
+  clearTimeout(resizeT);
+  resizeT=setTimeout(()=>{sizeSnow();sizeReef();measure();},140);
+});
+
+/* ================= reveals & counters ================= */
+const tweens=[];
+function addTween(el,to,dec,dur){tweens.push({el:el,to:to,dec:dec,start:performance.now(),dur:dur,from:0});}
+function updateTweens(now){
+  for(let i=tweens.length-1;i>=0;i--){
+    const t=tweens[i],p=clamp((now-t.start)/t.dur,0,1);
+    const v=lerp(t.from,t.to,1-Math.pow(1-p,4));
+    t.el.textContent=t.dec?v.toFixed(t.dec):fmt(v);
+    if(p>=1)tweens.splice(i,1);
+  }
+}
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  $$('.rv').forEach(el=>io.observe(el));
+  const cio=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        const el=e.target,to=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec,10)||0;
+        const val=el.id==='stat-reefs'?to+state.reserved:to;
+        if(RM){el.textContent=dec?val.toFixed(dec):fmt(val);}
+        else addTween(el,val,dec,1500);
+        cio.unobserve(el);
+      }
+    });
+  },{threshold:.5});
+  $$('[data-count]').forEach(el=>cio.observe(el));
+  const hio=new IntersectionObserver(es=>{es.forEach(e=>{heroVisible=e.isIntersecting;});},{threshold:.03});
+  hio.observe(stage);
+}else{
+  $$('.rv').forEach(el=>el.classList.add('in'));
+  $$('[data-count]').forEach(el=>{const dec=parseInt(el.dataset.dec,10)||0;const v=parseFloat(el.dataset.count);el.textContent=dec?v.toFixed(dec):fmt(v);});
+}
+
+/* ================= accordions ================= */
+function bindAccordion(headSel,itemSel){
+  $$(headSel).forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const item=btn.closest(itemSel);
+      const open=item.classList.toggle('open');
+      btn.setAttribute('aria-expanded',String(open));
+      AudioKit.blip();
+      setTimeout(measure,540);
+    });
+  });
+}
+bindAccordion('.sp-head','.sp');
+bindAccordion('.faq-q','.faq-item');
+
+/* ================= mobile menu ================= */
+const menuBtn=$('#menu-btn'),mobileMenu=$('#mobile-menu');
+function closeMenu(){menuBtn.setAttribute('aria-expanded','false');mobileMenu.classList.remove('open');}
+menuBtn.addEventListener('click',()=>{
+  const open=menuBtn.getAttribute('aria-expanded')==='true';
+  menuBtn.setAttribute('aria-expanded',String(!open));
+  mobileMenu.classList.toggle('open',!open);
+});
+$$('#mobile-menu a').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
+document.addEventListener('click',e=>{
+  if(mobileMenu.classList.contains('open')&&!mobileMenu.contains(e.target)&&!menuBtn.contains(e.target))closeMenu();
+});
+
+/* ================= pre-order form ================= */
+const orderForm=$('#order-form'),emailIn=$('#email'),lineageSel=$('#lineage'),errEl=$('#form-err'),orderBtn=$('#order-btn');
+function reservedCount(){return 2318+state.reserved;}
+function syncManifest(){$('#next-num').textContent=fmt(reservedCount()+1);}
+syncManifest();
+function burst(){
+  if(RM)return;
+  const holder=$('#burst'),colors=['#3FE0C5','#FFC46B','#F26BB5','#FF7A5C','#F2E9DA'];
+  for(let i=0;i<14;i++){
+    const b=document.createElement('i');
+    b.style.setProperty('--x',rnd(30,70)+'%');
+    b.style.setProperty('--y',rnd(55,75)+'%');
+    b.style.setProperty('--tx',rnd(-110,110)+'px');
+    b.style.setProperty('--ty',rnd(-160,-60)+'px');
+    b.style.setProperty('--s',rnd(4,10)+'px');
+    b.style.setProperty('--c',colors[i%colors.length]);
+    b.addEventListener('animationend',()=>b.remove());
+    holder.appendChild(b);
+  }
+}
+orderForm.addEventListener('submit',e=>{
+  e.preventDefault();
+  const v=emailIn.value.trim();
+  const ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  if(!ok){
+    emailIn.setAttribute('aria-invalid','true');
+    errEl.textContent='That address won\u2019t survive the salt. Try a real one.';
+    const card=$('.order-card');
+    if(!RM){card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');}
+    emailIn.focus();
+    return;
+  }
+  emailIn.removeAttribute('aria-invalid');errEl.textContent='';
+  orderBtn.classList.add('loading');
+  setTimeout(()=>{
+    orderBtn.classList.remove('loading');
+    state.reserved++;LS.set('dw_count',state.reserved);
+    const num=reservedCount();
+    const li=lineageSel.value;
+    const lineage=li==='surprise'?'Surprise lineage · sealed until casting':GENRES[parseInt(li,10)].latin;
+    $('#succ-meta').textContent='№ '+fmt(num)+' · '+lineage+' · '+v;
+    $('#order-flow').hidden=true;
+    $('#order-success').hidden=false;
+    $('#succ-h').focus();
+    burst();
+    AudioKit.chordUp();
+    const stat=$('#stat-reefs');
+    if(stat){stat.textContent=fmt(num);flashEl(stat);}
+    syncManifest();measure();
+    announce('Reservation confirmed, number '+fmt(num));
+  },RM?60:750);
+});
+$('#again-btn').addEventListener('click',()=>{
+  $('#order-success').hidden=true;
+  $('#order-flow').hidden=false;
+  orderForm.reset();
+  emailIn.focus();measure();
+});
+
+/* ================= press kit ================= */
+$('#press-kit').addEventListener('click',()=>{
+  const txt=['DRIFTWOOD — PRESS KIT','','Fast music. Slow stone.','',
+  'Driftwood No. 01 is a palm-sized desk reef that turns Spotify listening','history into slowly accreting coral-mineral: 2–4 mm per month, coloured',
+  'by genre. Five lineages: Flabellum aeternum (ambient), Cervicornis swing',
+  '(jazz), Noctiluca modularis (electronic), Turris adagio (classical),',
+  'Globulus domesticus (folk).','',
+  'SPECIFICATIONS','  Footprint: 92 x 92 x 118 mm · 640 g watered','  Power: USB-C, 5 W','  Cell: 400 ml sealed saltwater','  Base: reclaimed driftwood, one of one','  Light: 12 dusk-timed polyp LEDs','',
+  'PRICE & AVAILABILITY','  $149 · $10 refundable reservation · first tide March 2027 · 500 units','',
+  'NOTE','  Driftwood is a fictional product created as a design study.','  No polyps were harmed. No data leaves your device, mostly because',
+  '  the device does not exist.','',
+  'CONTACT','  hello@driftwood.example'].join('\n');
+  try{
+    const blob=new Blob([txt],{type:'text/plain'});
+    const a=document.createElement('a');
+    a.download='driftwood-press-kit.txt';
+    a.href=URL.createObjectURL(blob);a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+    AudioKit.blip();
+  }catch(e){}
+});
+
+/* ================= master loop ================= */
+let last=performance.now();
+function tick(now){
+  const dt=Math.min(50,now-last);last=now;
+  if(!document.hidden){
+    if(scrollDirty){applyScroll();scrollDirty=false;}
+    updateTweens(now);
+    if(!RM)drawSnow(now,dt);
+    if(heroVisible){
+      updateHeroWorld(dt,now);
+      updateDemo(dt);
+      drawHero(now);
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ================= boot ================= */
+if(window.matchMedia){
+  const mq=matchMedia('(prefers-reduced-motion: reduce)');
+  const onChange=()=>{RM=mq.matches;if(RM)drawSnow(0,0);};
+  if(mq.addEventListener)mq.addEventListener('change',onChange);
+}
+preGrow([24,20,12,10,16]);
+state.height=11.2+nodes.length*.014;
+updateReadouts();
+nextTrack();
+syncPlayBtn();
+paintRange(tideRange);paintRange(glowRange);
+updateSoundBtn();
+measure();
+window.addEventListener('load',measure);
+requestAnimationFrame(tick);
+requestAnimationFrame(()=>{document.body.classList.add('loaded');});
+if(RM){logLine('<b>SEED CAST</b> · reduced motion: the reef holds still — press Listen to grow it',false);}
+})();
+</script>
+<script>
+/* failsafe: if boot ever stalls, the words still surface */
+setTimeout(function(){
+  if(!document.body.classList.contains('loaded')){
+    document.body.classList.add('loaded');
+    var els=document.querySelectorAll('.rv');
+    for(var i=0;i<els.length;i++)els[i].classList.add('in');
+  }
+},1800);
+</script>
+</body>
+</html>
+```
