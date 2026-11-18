@@ -15,3 +15,9 @@ https://deepsad.github.io/driftwood/qwen
 
 ChatGPT 6.2 Astra
 https://deepsad.github.io/driftwood/astra/
+
+Kimi K3.1Pro
+https://deepsad.github.io/driftwood/kimi/
+
+Deepseek V4.1 Flash
+https://deepsad.github.io/driftwood/deepseek/
