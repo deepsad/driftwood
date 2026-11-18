@@ -6,4 +6,6 @@ Single self-contained `index.html` — HTML, CSS and vanilla JS, no external lib
 
 Live: https://deepsad.github.io/driftwood/
 
+Alternative version: https://deepsad.github.io/driftwood/gpt/ (`gpt/index.html`)
+
 *Driftwood is fictional. Not affiliated with or endorsed by Spotify.*
